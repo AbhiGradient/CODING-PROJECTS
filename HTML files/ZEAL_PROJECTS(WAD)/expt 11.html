@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Experiment 11</title>
+
+<style>
+form {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.full {
+    grid-column: span 2;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div style="background-color:#2b2bac;color:white;padding:20px;border-radius:15px;">
+<h1 align="center">Experiment-11</h1>
+</div>
+</header>
+
+<main>
+<div style="width:350px;margin:40px auto;padding:20px;border:3px solid black;border-radius:15px;">
+<h3>WORKSHOP REGISTRATION:</h3>
+
+<form>
+
+<label>Participant Name:</label>
+<input type="text" placeholder="Enter full name">
+
+<label>Registration Code:</label>
+<input type="password" placeholder="Enter registration code">
+
+<label>Session Preference:</label>
+<div>
+<label><input type="radio" name="session"> Morning Session</label><br>
+<label><input type="radio" name="session"> Evening Session</label>
+</div>
+
+<label>Skills Interested In:</label>
+<div>
+<label><input type="checkbox"> Web Development</label><br>
+<label><input type="checkbox"> Data Science</label><br>
+<label><input type="checkbox"> Artificial Intelligence</label><br>
+<label><input type="checkbox"> Cyber Security</label>
+</div>
+
+<label>Workshop City:</label>
+<select>
+<option>Select City</option>
+<option>Pune</option>
+<option>Mumbai</option>
+<option>Delhi</option>
+<option>Bangalore</option>
+</select>
+
+<label class="full">Additional Notes:</label>
+<textarea class="full" rows="4" placeholder="Enter additional requirements or notes"></textarea>
+
+</form>
+</div>
+</main>
+
+<footer>
+<div style="text-align:center;background-color:#393838;color:white;padding:25px;border-radius:15px;">
+<address>wad.edu@zeal.com | +(91)-*******</address>
+<p>&copy; Abhishek & Co.</p>
+</div>
+</footer>
+
+</body>
+</html>

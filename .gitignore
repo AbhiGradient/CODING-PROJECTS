@@ -1,0 +1,62 @@
+# Ignore nested repos
+C_files/C-language-practice/
+HTML files/WAD_mini_PROJECT/
+RUST/
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDEs
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# C / C++
+*.o
+*.out
+*.obj
+*.exe
+*.dll
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+env/
+
+# Node
+node_modules/
+dist/
+build/
+
+# Java
+*.class
+*.jar
+
+# Go
+*.test
+*.prof
+
+# Rust
+target/
+
+# C#
+bin/
+obj/
+
+# Databases
+*.db
+*.sqlite
+
+# Archives
+*.zip
+*.tar
+*.rar
+
+# Env files
+.env

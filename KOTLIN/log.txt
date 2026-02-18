@@ -1,0 +1,5 @@
+2026-02-04T15:41:53.273766700 : Program started
+2026-02-04T15:41:59.977769800 : User entered name: abhishek sapkale
+2026-02-04T15:42:00.131765600 : CPU test completed
+2026-02-04T15:42:00.154766700 : Collections tested
+2026-02-04T15:42:02.686763200 : Program finished

@@ -1,0 +1,5 @@
+2026-02-03 22:33:29 : Program started
+2026-02-03 22:33:44 : User entered name: abhishek
+2026-02-03 22:33:44 : CPU test completed
+2026-02-03 22:33:44 : Array operations done
+2026-02-03 22:33:46 : Program finished successfully

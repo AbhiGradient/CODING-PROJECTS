@@ -1,0 +1,101 @@
+/* h1{
+    color: white;
+    background-color: red;
+}
+p1 {
+    color: purple;
+}
+p2{
+    color: blue;
+    background-color: #ffff00;
+}
+
+button{
+    color: white;
+    background-color: black;
+}
+body{
+    background-color: rgba(214, 145, 211, 0.452);
+} */
+#box{
+    background-color: blue;
+    color: white;
+    /* this is a comment in CSS */
+}
+/*for changing the color of a class: */
+.heading {
+    color:red       
+} 
+
+/* OR */
+
+h1, h2, h3 {
+    color: red;
+}
+
+button{
+       color:black;
+       background-color: pink;
+
+}
+#but2{
+      color:white;
+      background-color: black;
+}
+
+#but3{
+      color:green;
+      background-color: red;
+}
+p{
+    text-align:justify;
+}
+.h3{
+    text-decoration:line-through;
+    color: black;
+    text-decoration: red underline ;
+    text-decoration: blue underline wavy ;
+}
+/* TO remove the underline of the underline of the click me <a> link: */
+a{
+    color: red;
+    text-decoration: none;
+    }
+#h1{
+    font-weight: 900;
+}
+#h01{
+   font-weight: bold;
+}
+#h2{
+    font-weight: 250;
+}
+#h3{
+    font-weight: 600;
+}
+#h4{
+    font-weight: 900;
+}
+#one{
+    font-family:cursive;
+}
+#two{
+    font-family:Arial, Helvetica, sans-serif;
+}
+#outer{
+    font-size: 25px;
+}
+#inner{
+    font-size: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+

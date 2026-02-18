@@ -1,0 +1,10 @@
+2026-02-03T21:57:39.361512300 : Program started
+2026-02-03T21:58:40.645227 : User entered name: abhishek sapkale
+2026-02-03T21:58:40.671103700 : CPU test completed
+2026-02-03T21:58:40.681010200 : Array operations done
+2026-02-03T21:58:43.210432100 : Program finished successfully
+2026-02-03T22:00:49.417348500 : Program started
+2026-02-03T22:00:57.100380800 : User entered name: bhishek sapkale
+2026-02-03T22:00:57.128386500 : CPU test completed
+2026-02-03T22:00:57.150377900 : Array operations done
+2026-02-03T22:00:59.662285200 : Program finished successfully

@@ -1,0 +1,82 @@
+/* External CSS – Ford Inspired Theme */
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: linear-gradient(to bottom, #f2f6fb, #ffffff);
+}
+
+header {
+    background: linear-gradient(135deg, #003478, #001a3d);
+    color: white;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 42px;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 18px;
+    opacity: 0.9;
+}
+
+.section {
+    padding: 50px 60px;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 40px;
+}
+
+.cars {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.car-card {
+    background-color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.car-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.25);
+}
+
+.car-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.car-info {
+    padding: 20px;
+}
+
+.car-info h3 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.car-info p {
+    color: #555;
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+footer {
+    background-color: #001a3d;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+}

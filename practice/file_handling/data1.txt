@@ -1,0 +1,7 @@
+This is a sample text file for testing the word frequency program.
+The word "the" appears multiple times in this text.
+The quick brown fox jumps over the lazy dog.
+The cat sat on the mat.
+The sun is shining brightly.
+The word "the" is repeated here again.
+This text includes various words to count frequencies.

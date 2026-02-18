@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Experiment 12</title>
+
+<style>
+#butt{
+    color: white;
+    background-color: green;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+}
+
+#res{
+    color: white;
+    background-color: red;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+}
+
+form {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.buttons {
+    grid-column: span 2;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div style="background-color:#24725b;color:white;padding:25px;border-radius:15px;">
+<h1 align="center">Experiment-12</h1>
+</div>
+</header>
+
+<main>
+<div style="width:350px;margin:40px auto;padding:20px;border:3px solid black;border-radius:15px;">
+<h3>PROFILE:</h3>
+
+<form>
+
+<label>Username:</label>
+<input type="text" placeholder="Enter username">
+
+<label>Password:</label>
+<input type="password" placeholder="Enter password">
+
+<label>Gender:</label>
+<div>
+<label><input type="radio" name="gender"> Male</label><br>
+<label><input type="radio" name="gender"> Female</label>
+</div>
+
+<label>Qualification:</label>
+<div>
+<label><input type="checkbox"> SSC</label><br>
+<label><input type="checkbox"> HSC</label><br>
+<label><input type="checkbox"> Graduate</label><br>
+<label><input type="checkbox"> Post Graduate</label>
+</div>
+
+<label>City:</label>
+<select>
+<option>Select City</option>
+<option>Pune</option>
+<option>Mumbai</option>
+<option>Delhi</option>
+<option>Bangalore</option>
+</select>
+
+<label class="full">Feedback:</label>
+<textarea class="full" rows="4" placeholder="Enter your feedback"></textarea>
+
+
+<div class="buttons">
+<input type="submit" id="butt" value="SUBMIT">
+<input type="reset" id="res" value="RESET">
+</div>
+
+</form>
+</div>
+</main>
+
+<footer>
+<div style="text-align:center;background-color:#393838;color:white;padding:25px;border-radius:15px;">
+<address>wad.edu@zeal.com | +(91)-*******</address>
+<p>&copy; Abhishek & Co.</p>
+</div>
+</footer>
+
+</body>
+</html>
