@@ -31,3 +31,13 @@ marks.sort(reverse=True)  #sort the list in descending order
 print(marks)
 marks.reverse()  #reverse the order of the list
 print(marks)
+
+list = ["apple", "banana", "cherry", "date", "fig", "grape"]
+
+list.sort()  #sort the list in ascending order
+print(list)
+list.sort(reverse=True)  #sort the list in descending order
+print(list)
+list.reverse()  #reverse the order of the list
+print(list)
+
