@@ -31,6 +31,10 @@ marks.sort(reverse=True)  #sort the list in descending order
 print(marks)
 marks.reverse()  #reverse the order of the list
 print(marks)
+marks.remove(99)  #remove the specified element from the list #removes the first occurrence of the element
+print(marks)    
+marks.pop(2)  #remove the element at the specified index
+print(marks) 
 
 list = ["apple", "banana", "cherry", "date", "fig", "grape"]
 
