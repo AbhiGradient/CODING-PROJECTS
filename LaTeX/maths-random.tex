@@ -1,0 +1,756 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{parskip}
+
+\geometry{margin=2.5cm}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Unit V -- Probability Distribution}
+\lhead{Zeal College of Engineering and Research}
+\cfoot{\thepage}
+
+\titleformat{\section}{\large\bfseries}{Q.\thesection.}{0.5em}{}
+\setcounter{secnumdepth}{1}
+
+\title{\textbf{ZEAL COLLEGE OF ENGINEERING AND RESEARCH, NARHE, PUNE}\\[0.4em]
+\large Department of AI \& DS $|$ Probability and Statistics\\
+\large Unit V -- Probability Distribution $|$ Question Bank -- Answers\\
+Academic Year: 2025--2026 $|$ Class: F.Y.B.Tech}
+\date{}
+
+\begin{document}
+\maketitle
+\thispagestyle{fancy}
+\hrule
+\vspace{1em}
+
+% ============================================================
+\section{Question 1}
+% ============================================================
+\textbf{The probability distribution of $X$ is given as:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$X$ & 0 & 1 & 2 & 3 & 4 \\
+\hline
+$P(X=x)$ & 0.1 & $k$ & $2k$ & $2k$ & $k$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Step 1: Find the value of $k$}
+
+Since the sum of all probabilities must equal 1:
+\[
+0.1 + k + 2k + 2k + k = 1
+\]
+\[
+0.1 + 6k = 1 \implies 6k = 0.9 \implies \boxed{k = 0.15}
+\]
+
+\textbf{Updated Distribution:}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$X$ & 0 & 1 & 2 & 3 & 4 \\
+\hline
+$P(X=x)$ & 0.10 & 0.15 & 0.30 & 0.30 & 0.15 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Step 2: Find $P(X < 2)$}
+\[
+P(X < 2) = P(X=0) + P(X=1) = 0.10 + 0.15 = \boxed{0.25}
+\]
+
+\textbf{Step 3: Find $P(X \geq 3)$}
+\[
+P(X \geq 3) = P(X=3) + P(X=4) = 0.30 + 0.15 = \boxed{0.45}
+\]
+
+\textbf{Step 4: Find $P(1 \leq X \leq 3)$}
+\[
+P(1 \leq X \leq 3) = P(X=1) + P(X=2) + P(X=3) = 0.15 + 0.30 + 0.30 = \boxed{0.75}
+\]
+
+\textbf{Step 5: Find Expectation $E(X)$}
+\[
+E(X) = \sum x \cdot P(X=x)
+\]
+\[
+E(X) = 0(0.10) + 1(0.15) + 2(0.30) + 3(0.30) + 4(0.15)
+\]
+\[
+= 0 + 0.15 + 0.60 + 0.90 + 0.60 = \boxed{2.25}
+\]
+
+\textbf{Step 6: Find Variance of $X$}
+
+First, find $E(X^2)$:
+\[
+E(X^2) = 0^2(0.10) + 1^2(0.15) + 2^2(0.30) + 3^2(0.30) + 4^2(0.15)
+\]
+\[
+= 0 + 0.15 + 1.20 + 2.70 + 2.40 = 6.45
+\]
+\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 6.45 - (2.25)^2 = 6.45 - 5.0625 = \boxed{1.3875}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 2}
+% ============================================================
+\textbf{A random variable $X$ has the following probability distribution:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|c|c|}
+\hline
+$X$ & 1 & 2 & 3 & 4 & 5 & 6 & 7 \\
+\hline
+$P(x)$ & $k$ & $2k$ & $3k$ & $k^2$ & $k^2+k$ & $2k^2$ & $4k^2$ \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Step 1: Find the value of $k$}
+
+Sum of all probabilities = 1:
+\[
+k + 2k + 3k + k^2 + k^2 + k + 2k^2 + 4k^2 = 1
+\]
+\[
+8k^2 + 7k - 1 = 0
+\]
+Solving using the quadratic formula:
+\[
+k = \frac{-7 \pm \sqrt{49 + 32}}{16} = \frac{-7 \pm 9}{16}
+\]
+Taking the positive root:
+\[
+k = \frac{2}{16} = \boxed{\frac{1}{8} = 0.125}
+\]
+(Negative root $k = -1$ is rejected since probability cannot be negative.)
+
+\textbf{Step 2: Find $P(X > 5)$}
+\[
+P(X > 5) = P(X=6) + P(X=7) = 2k^2 + 4k^2 = 6k^2 = 6\left(\frac{1}{64}\right) = \frac{6}{64} = \boxed{\frac{3}{32}}
+\]
+
+\textbf{Step 3: Find $P(0 \leq X \leq 5)$}
+\[
+P(0 \leq X \leq 5) = P(X=1)+P(X=2)+P(X=3)+P(X=4)+P(X=5)
+\]
+\[
+= k + 2k + 3k + k^2 + k^2 + k = 7k + 2k^2
+\]
+\[
+= 7\left(\frac{1}{8}\right) + 2\left(\frac{1}{64}\right) = \frac{7}{8} + \frac{2}{64} = \frac{56}{64} + \frac{2}{64} = \frac{58}{64} = \boxed{\frac{29}{32}}
+\]
+
+\textbf{Step 4: Expectation $E(X)$}
+
+With $k = \frac{1}{8}$, the probabilities are:
+\[
+P(1)=\frac{1}{8},\ P(2)=\frac{2}{8},\ P(3)=\frac{3}{8},\ P(4)=\frac{1}{64},\ P(5)=\frac{1}{64}+\frac{1}{8}=\frac{9}{64},\ P(6)=\frac{2}{64},\ P(7)=\frac{4}{64}
+\]
+\[
+E(X) = 1\!\cdot\!\frac{8}{64}+2\!\cdot\!\frac{16}{64}+3\!\cdot\!\frac{24}{64}+4\!\cdot\!\frac{1}{64}+5\!\cdot\!\frac{9}{64}+6\!\cdot\!\frac{2}{64}+7\!\cdot\!\frac{4}{64}
+\]
+\[
+= \frac{8+32+72+4+45+12+28}{64} = \frac{201}{64} \approx \boxed{3.14}
+\]
+
+\textbf{Step 5: Variance of $X$}
+\[
+E(X^2) = 1\!\cdot\!\frac{8}{64}+4\!\cdot\!\frac{16}{64}+9\!\cdot\!\frac{24}{64}+16\!\cdot\!\frac{1}{64}+25\!\cdot\!\frac{9}{64}+36\!\cdot\!\frac{2}{64}+49\!\cdot\!\frac{4}{64}
+\]
+\[
+= \frac{8+64+216+16+225+72+196}{64} = \frac{797}{64} \approx 12.45
+\]
+\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 12.45 - (3.14)^2 = 12.45 - 9.86 = \boxed{2.59}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 3}
+% ============================================================
+\textbf{In a continuous distribution, the density function is $f(x) = kx(2-x),\ 0 < x < 2$.}
+
+\textbf{Step 1: Find the value of $k$}
+
+For a valid probability density function, $\displaystyle\int_{0}^{2} f(x)\,dx = 1$:
+\[
+\int_{0}^{2} kx(2-x)\,dx = 1
+\]
+\[
+k\int_{0}^{2}(2x - x^2)\,dx = 1
+\]
+\[
+k\left[x^2 - \frac{x^3}{3}\right]_0^2 = 1
+\]
+\[
+k\left[4 - \frac{8}{3}\right] = 1 \implies k\cdot\frac{4}{3} = 1 \implies \boxed{k = \frac{3}{4}}
+\]
+
+\textbf{Step 2: Find $P(0 \leq X \leq 1)$}
+\[
+P(0 \leq X \leq 1) = \int_{0}^{1} \frac{3}{4}x(2-x)\,dx = \frac{3}{4}\int_{0}^{1}(2x - x^2)\,dx
+\]
+\[
+= \frac{3}{4}\left[x^2 - \frac{x^3}{3}\right]_0^1 = \frac{3}{4}\left[1 - \frac{1}{3}\right] = \frac{3}{4}\cdot\frac{2}{3} = \boxed{\frac{1}{2}}
+\]
+
+\textbf{Step 3: Find Mean}
+\[
+\text{Mean} = E(X) = \int_{0}^{2} x\cdot f(x)\,dx = \frac{3}{4}\int_{0}^{2}x^2(2-x)\,dx
+\]
+\[
+= \frac{3}{4}\int_{0}^{2}(2x^2 - x^3)\,dx = \frac{3}{4}\left[\frac{2x^3}{3} - \frac{x^4}{4}\right]_0^2
+\]
+\[
+= \frac{3}{4}\left[\frac{16}{3} - 4\right] = \frac{3}{4}\cdot\frac{4}{3} = \boxed{1}
+\]
+
+\textbf{Step 4: Find Variance}
+\[
+E(X^2) = \int_{0}^{2} x^2\cdot f(x)\,dx = \frac{3}{4}\int_{0}^{2}x^3(2-x)\,dx = \frac{3}{4}\int_{0}^{2}(2x^3-x^4)\,dx
+\]
+\[
+= \frac{3}{4}\left[\frac{x^4}{2} - \frac{x^5}{5}\right]_0^2 = \frac{3}{4}\left[8 - \frac{32}{5}\right] = \frac{3}{4}\cdot\frac{8}{5} = \frac{6}{5} = 1.2
+\]
+\[
+\text{Var}(X) = E(X^2) - [E(X)]^2 = 1.2 - 1 = \boxed{0.2}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 4}
+% ============================================================
+\textbf{Mean and variance of a binomial distribution are 6 and 2. Find $P(X=0)$ and $P(0 < X \leq 3)$.}
+
+\textbf{Step 1: Find parameters $n$, $p$, $q$}
+
+For binomial distribution: $\mu = np = 6$ and $\sigma^2 = npq = 2$
+
+Dividing:
+\[
+\frac{npq}{np} = \frac{2}{6} \implies q = \frac{1}{3} \implies p = 1 - q = \frac{2}{3}
+\]
+From $np = 6$:
+\[
+n \cdot \frac{2}{3} = 6 \implies n = 9
+\]
+
+\textbf{Step 2: Find $P(X = 0)$}
+
+Using binomial formula $P(X=r) = \binom{n}{r} p^r q^{n-r}$:
+\[
+P(X=0) = \binom{9}{0}\left(\frac{2}{3}\right)^0\left(\frac{1}{3}\right)^9 = 1\cdot1\cdot\frac{1}{3^9} = \frac{1}{19683} \approx \boxed{0.0000508}
+\]
+
+\textbf{Step 3: Find $P(0 < X \leq 3)$}
+\[
+P(0 < X \leq 3) = P(X=1) + P(X=2) + P(X=3)
+\]
+
+\[
+P(X=1) = \binom{9}{1}\left(\frac{2}{3}\right)^1\left(\frac{1}{3}\right)^8 = 9\cdot\frac{2}{3}\cdot\frac{1}{6561} = \frac{18}{19683}
+\]
+\[
+P(X=2) = \binom{9}{2}\left(\frac{2}{3}\right)^2\left(\frac{1}{3}\right)^7 = 36\cdot\frac{4}{9}\cdot\frac{1}{2187} = \frac{144}{19683}
+\]
+\[
+P(X=3) = \binom{9}{3}\left(\frac{2}{3}\right)^3\left(\frac{1}{3}\right)^6 = 84\cdot\frac{8}{27}\cdot\frac{1}{729} = \frac{672}{19683}
+\]
+
+\[
+P(0 < X \leq 3) = \frac{18 + 144 + 672}{19683} = \frac{834}{19683} \approx \boxed{0.04235}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 5}
+% ============================================================
+\textbf{Six dice are thrown 729 times. How many times do you expect at least three dice to show 5 or 6?}
+
+\textbf{Step 1: Define parameters}
+
+Probability of getting 5 or 6 on one die:
+\[
+p = \frac{2}{6} = \frac{1}{3}, \quad q = 1 - \frac{1}{3} = \frac{2}{3}, \quad n = 6
+\]
+
+\textbf{Step 2: Find $P(X \geq 3)$}
+\[
+P(X \geq 3) = P(3) + P(4) + P(5) + P(6)
+\]
+
+Using $P(X=r) = \binom{6}{r}\left(\frac{1}{3}\right)^r\left(\frac{2}{3}\right)^{6-r}$:
+
+\[
+P(3) = \binom{6}{3}\left(\frac{1}{3}\right)^3\left(\frac{2}{3}\right)^3 = 20 \cdot \frac{1}{27} \cdot \frac{8}{27} = \frac{160}{729}
+\]
+\[
+P(4) = \binom{6}{4}\left(\frac{1}{3}\right)^4\left(\frac{2}{3}\right)^2 = 15 \cdot \frac{1}{81} \cdot \frac{4}{9} = \frac{60}{729}
+\]
+\[
+P(5) = \binom{6}{5}\left(\frac{1}{3}\right)^5\left(\frac{2}{3}\right)^1 = 6 \cdot \frac{1}{243} \cdot \frac{2}{3} = \frac{12}{729}
+\]
+\[
+P(6) = \binom{6}{6}\left(\frac{1}{3}\right)^6 = \frac{1}{729}
+\]
+
+\[
+P(X \geq 3) = \frac{160 + 60 + 12 + 1}{729} = \frac{233}{729}
+\]
+
+\textbf{Step 3: Expected number of times}
+\[
+\text{Expected number} = 729 \times \frac{233}{729} = \boxed{233 \text{ times}}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 6}
+% ============================================================
+\textbf{An unbiased coin is thrown 10 times. Find the probability of:}
+\begin{itemize}[noitemsep]
+\item[(a)] Exactly 6 heads
+\item[(b)] At least 6 heads
+\end{itemize}
+
+\textbf{Step 1: Define parameters}
+
+Since coin is unbiased: $p = \frac{1}{2},\ q = \frac{1}{2},\ n = 10$
+
+Binomial formula: $P(X=r) = \binom{n}{r}p^r q^{n-r} = \binom{10}{r}\left(\frac{1}{2}\right)^{10}$
+
+\textbf{Part (a): $P(X = 6)$}
+\[
+P(X=6) = \binom{10}{6}\left(\frac{1}{2}\right)^{10} = \frac{210}{1024} = \boxed{\frac{105}{512} \approx 0.2051}
+\]
+
+\textbf{Part (b): $P(X \geq 6)$}
+\[
+P(X \geq 6) = P(6) + P(7) + P(8) + P(9) + P(10)
+\]
+\[
+= \frac{\binom{10}{6}+\binom{10}{7}+\binom{10}{8}+\binom{10}{9}+\binom{10}{10}}{1024}
+\]
+\[
+= \frac{210 + 120 + 45 + 10 + 1}{1024} = \frac{386}{1024} = \boxed{\frac{193}{512} \approx 0.3770}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 7}
+% ============================================================
+\textbf{The probability of a man hitting a target is $\dfrac{1}{3}$. If he fires 5 times, find the probability of hitting the target at least twice.}
+
+\textbf{Step 1: Define parameters}
+\[
+p = \frac{1}{3},\quad q = \frac{2}{3},\quad n = 5
+\]
+
+\textbf{Step 2: Find $P(X \geq 2)$}
+
+Using complement:
+\[
+P(X \geq 2) = 1 - P(X < 2) = 1 - [P(X=0) + P(X=1)]
+\]
+
+\[
+P(X=0) = \binom{5}{0}\left(\frac{1}{3}\right)^0\left(\frac{2}{3}\right)^5 = \frac{32}{243}
+\]
+\[
+P(X=1) = \binom{5}{1}\left(\frac{1}{3}\right)^1\left(\frac{2}{3}\right)^4 = 5\cdot\frac{1}{3}\cdot\frac{16}{81} = \frac{80}{243}
+\]
+\[
+P(X=0) + P(X=1) = \frac{32+80}{243} = \frac{112}{243}
+\]
+
+\[
+P(X \geq 2) = 1 - \frac{112}{243} = \frac{131}{243} \approx \boxed{0.5391}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 8}
+% ============================================================
+\textbf{A manufacturer knows that 2\% of cotter pins are defective. He sells boxes of 100 pins, guaranteeing not more than 5 defective. Find the approximate probability that a box will fail to meet the guarantee.}
+
+\textbf{Step 1: Use Poisson Approximation}
+
+Since $n = 100$ is large and $p = 0.02$ is small:
+\[
+\lambda = np = 100 \times 0.02 = 2
+\]
+
+Let $X$ = number of defective pins. Then $X \sim \text{Poisson}(2)$.
+
+\textbf{Step 2: The box fails if $X > 5$}
+\[
+P(X > 5) = 1 - P(X \leq 5)
+\]
+
+Using Poisson PMF: $P(X=r) = \dfrac{e^{-\lambda}\lambda^r}{r!}$, with $e^{-2} \approx 0.1353$:
+
+\[
+P(0) = e^{-2} = 0.1353
+\]
+\[
+P(1) = e^{-2}\cdot\frac{2}{1} = 0.2707
+\]
+\[
+P(2) = e^{-2}\cdot\frac{4}{2} = 0.2707
+\]
+\[
+P(3) = e^{-2}\cdot\frac{8}{6} = 0.1804
+\]
+\[
+P(4) = e^{-2}\cdot\frac{16}{24} = 0.0902
+\]
+\[
+P(5) = e^{-2}\cdot\frac{32}{120} = 0.0361
+\]
+
+\[
+P(X \leq 5) = 0.1353 + 0.2707 + 0.2707 + 0.1804 + 0.0902 + 0.0361 = 0.9834
+\]
+
+\[
+P(X > 5) = 1 - 0.9834 = \boxed{0.0166}
+\]
+
+The probability that a box will fail to meet the guaranteed quality is approximately \textbf{0.0166} (about 1.66\%).
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 9}
+% ============================================================
+\textbf{In a factory, the chance of a razor blade being defective is $\dfrac{1}{500}$. Blades are supplied in packets of 10. Using Poisson distribution, find the number of packets (out of 10,000) containing:}
+\begin{itemize}[noitemsep]
+\item[(a)] No defective blade
+\item[(b)] Two defective blades
+\end{itemize}
+
+\textbf{Step 1: Define Poisson parameter}
+\[
+p = \frac{1}{500},\quad n = 10,\quad \lambda = np = \frac{10}{500} = 0.02
+\]
+
+Using $e^{-0.02} \approx 0.9802$.
+
+\textbf{Part (a): $P(X = 0)$}
+\[
+P(X=0) = \frac{e^{-0.02}(0.02)^0}{0!} = e^{-0.02} = 0.9802
+\]
+\[
+\text{Number of packets} = 10000 \times 0.9802 = \boxed{9802}
+\]
+
+\textbf{Part (b): $P(X = 2)$}
+\[
+P(X=2) = \frac{e^{-0.02}(0.02)^2}{2!} = \frac{0.9802 \times 0.0004}{2} = \frac{0.000392}{2} = 0.000196
+\]
+\[
+\text{Number of packets} = 10000 \times 0.000196 \approx \boxed{2}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 10}
+% ============================================================
+\textbf{Fit Poisson's distribution to the following data and calculate the theoretical frequencies.}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+$x$ & 0 & 1 & 2 & 3 & 4 \\
+\hline
+$f$ & 122 & 60 & 15 & 2 & 1 \\
+\hline
+\end{tabular}
+\end{center}
+
+\textbf{Step 1: Calculate Total Frequency}
+\[
+N = \sum f = 122 + 60 + 15 + 2 + 1 = 200
+\]
+
+\textbf{Step 2: Calculate Mean $\lambda$}
+\[
+\lambda = \bar{x} = \frac{\sum fx}{N} = \frac{0(122)+1(60)+2(15)+3(2)+4(1)}{200} = \frac{0+60+30+6+4}{200} = \frac{100}{200} = 0.5
+\]
+
+\textbf{Step 3: Apply Poisson PMF}
+
+$P(X=r) = \dfrac{e^{-\lambda}\lambda^r}{r!}$, with $\lambda = 0.5$ and $e^{-0.5} \approx 0.6065$.
+
+\textbf{Step 4: Theoretical Frequencies $F = N \times P(X=r)$}
+
+\[
+P(0) = e^{-0.5} = 0.6065 \implies F(0) = 200 \times 0.6065 = 121.3 \approx 121
+\]
+\[
+P(1) = e^{-0.5}\cdot\frac{0.5}{1} = 0.3033 \implies F(1) = 200 \times 0.3033 = 60.6 \approx 61
+\]
+\[
+P(2) = e^{-0.5}\cdot\frac{(0.5)^2}{2!} = \frac{0.6065 \times 0.25}{2} = 0.0758 \implies F(2) = 200 \times 0.0758 = 15.16 \approx 15
+\]
+\[
+P(3) = e^{-0.5}\cdot\frac{(0.5)^3}{3!} = \frac{0.6065 \times 0.125}{6} = 0.01264 \implies F(3) = 200 \times 0.01264 \approx 3
+\]
+\[
+P(4) = e^{-0.5}\cdot\frac{(0.5)^4}{4!} = \frac{0.6065 \times 0.0625}{24} = 0.00158 \implies F(4) = 200 \times 0.00158 \approx 0
+\]
+
+\textbf{Comparison Table:}
+
+\begin{center}
+\begin{tabular}{|c|c|c|}
+\hline
+$x$ & Observed Frequency $f$ & Theoretical Frequency $F$ \\
+\hline
+0 & 122 & 121 \\
+1 & 60 & 61 \\
+2 & 15 & 15 \\
+3 & 2 & 3 \\
+4 & 1 & 0 \\
+\hline
+\textbf{Total} & \textbf{200} & \textbf{200} \\
+\hline
+\end{tabular}
+\end{center}
+
+The theoretical frequencies closely match the observed frequencies, confirming a good Poisson fit with $\lambda = 0.5$.
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 11}
+% ============================================================
+\textbf{In a sample of 1000 cases, mean = 14, SD = 2.5. Assuming normal distribution, find:}
+\begin{itemize}[noitemsep]
+\item[(a)] How many students scored between 12 and 15
+\item[(b)] How many scored below 8
+\end{itemize}
+Given: $A(z=0.8) = 0.2881$, $A(z=0.4) = 0.1554$, $A(z=2.4) = 0.4918$
+
+\textbf{Given Data:} $\mu = 14,\ \sigma = 2.5,\ N = 1000$
+
+Z-score formula: $Z = \dfrac{X - \mu}{\sigma}$
+
+\textbf{Part (a): Students scoring between 12 and 15}
+
+\[
+Z_1 = \frac{12-14}{2.5} = \frac{-2}{2.5} = -0.8, \qquad Z_2 = \frac{15-14}{2.5} = \frac{1}{2.5} = 0.4
+\]
+\[
+P(12 < X < 15) = P(-0.8 < Z < 0.4)
+\]
+\[
+= P(-0.8 < Z < 0) + P(0 < Z < 0.4) = 0.2881 + 0.1554 = 0.4435
+\]
+\[
+\text{Number of students} = 1000 \times 0.4435 = 443.5 \approx \boxed{444}
+\]
+
+\textbf{Part (b): Students scoring below 8}
+\[
+Z = \frac{8-14}{2.5} = \frac{-6}{2.5} = -2.4
+\]
+\[
+P(X < 8) = P(Z < -2.4) = 0.5 - A(z=2.4) = 0.5 - 0.4918 = 0.0082
+\]
+\[
+\text{Number of students} = 1000 \times 0.0082 = 8.2 \approx \boxed{8}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 12}
+% ============================================================
+\textbf{In a test of 2000 electric bulbs, average life = 2040 hrs, SD = 60 hrs. Estimate:}
+\begin{itemize}[noitemsep]
+\item[(a)] Bulbs burning between 1920 and 2160 hours
+\item[(b)] Bulbs burning more than 2150 hours
+\end{itemize}
+Given: $A(z=2) = 0.4772$, $A(z=1.83) = 0.4664$
+
+\textbf{Given Data:} $\mu = 2040,\ \sigma = 60,\ N = 2000$
+
+\textbf{Part (a): Between 1920 and 2160 hours}
+\[
+Z_1 = \frac{1920-2040}{60} = \frac{-120}{60} = -2, \qquad Z_2 = \frac{2160-2040}{60} = \frac{120}{60} = 2
+\]
+\[
+P(1920 < X < 2160) = P(-2 < Z < 2) = 2 \times A(z=2) = 2 \times 0.4772 = 0.9544
+\]
+\[
+\text{Number of bulbs} = 2000 \times 0.9544 = 1908.8 \approx \boxed{1909}
+\]
+
+\textbf{Part (b): More than 2150 hours}
+\[
+Z = \frac{2150-2040}{60} = \frac{110}{60} = 1.83
+\]
+\[
+P(X > 2150) = P(Z > 1.83) = 0.5 - A(z=1.83) = 0.5 - 0.4664 = 0.0336
+\]
+\[
+\text{Number of bulbs} = 2000 \times 0.0336 = 67.2 \approx \boxed{67}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 13}
+% ============================================================
+\textbf{An MNC conducted an aptitude test for 1000 candidates. Average score = 45, SD = 25. Assuming normal distribution, find:}
+\begin{itemize}[noitemsep]
+\item[(a)] Number of candidates whose score exceeds 60
+\item[(b)] Number of candidates whose score lies between 30 and 60
+\end{itemize}
+Given: $A(Z=0.6) = 0.2257$
+
+\textbf{Given Data:} $\mu = 45,\ \sigma = 25,\ N = 1000$
+
+\textbf{Part (a): Score exceeds 60}
+\[
+Z = \frac{60-45}{25} = \frac{15}{25} = 0.6
+\]
+\[
+P(X > 60) = P(Z > 0.6) = 0.5 - A(Z=0.6) = 0.5 - 0.2257 = 0.2743
+\]
+\[
+\text{Number of candidates} = 1000 \times 0.2743 = 274.3 \approx \boxed{274}
+\]
+
+\textbf{Part (b): Score between 30 and 60}
+\[
+Z_1 = \frac{30-45}{25} = \frac{-15}{25} = -0.6, \qquad Z_2 = \frac{60-45}{25} = 0.6
+\]
+\[
+P(30 < X < 60) = P(-0.6 < Z < 0.6) = 2 \times A(Z=0.6) = 2 \times 0.2257 = 0.4514
+\]
+\[
+\text{Number of candidates} = 1000 \times 0.4514 = 451.4 \approx \boxed{451}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 14}
+% ============================================================
+\textbf{An AI-based facial recognition system has processing time $\sim N(\mu=8, \sigma=2)$ seconds. Find:}
+\begin{itemize}[noitemsep]
+\item[(a)] Probability that the system takes more than 10 seconds
+\item[(b)] Probability that processing time lies between 6 and 11 seconds
+\item[(c)] Out of 2000 images, how many are expected to take less than 5 seconds?
+\end{itemize}
+Given: $A(z=1) = 0.3413$, $A(z=1.5) = 0.4332$
+
+\textbf{Given Data:} $\mu = 8,\ \sigma = 2$
+
+\textbf{Part (a): $P(X > 10)$}
+\[
+Z = \frac{10-8}{2} = 1
+\]
+\[
+P(X > 10) = P(Z > 1) = 0.5 - A(z=1) = 0.5 - 0.3413 = \boxed{0.1587}
+\]
+
+\textbf{Part (b): $P(6 < X < 11)$}
+\[
+Z_1 = \frac{6-8}{2} = -1, \qquad Z_2 = \frac{11-8}{2} = 1.5
+\]
+\[
+P(6 < X < 11) = P(-1 < Z < 1.5)
+\]
+\[
+= P(-1 < Z < 0) + P(0 < Z < 1.5) = A(z=1) + A(z=1.5) = 0.3413 + 0.4332 = \boxed{0.7745}
+\]
+
+\textbf{Part (c): Expected images taking less than 5 seconds}
+\[
+Z = \frac{5-8}{2} = -1.5
+\]
+\[
+P(X < 5) = P(Z < -1.5) = 0.5 - A(z=1.5) = 0.5 - 0.4332 = 0.0668
+\]
+\[
+\text{Expected images} = 2000 \times 0.0668 = 133.6 \approx \boxed{134 \text{ images}}
+\]
+
+\vspace{1em}\hrule\vspace{1em}
+
+% ============================================================
+\section{Question 15}
+% ============================================================
+\textbf{An AI-based spam detection system classifies emails with time $\sim N(\mu=50\text{ ms}, \sigma=10\text{ ms})$. Find:}
+\begin{itemize}[noitemsep]
+\item[(a)] Probability that the AI takes more than 70 ms
+\item[(b)] Probability that classification time lies between 40 and 60 ms
+\item[(c)] Out of 5000 emails, how many are expected to take less than 30 ms?
+\end{itemize}
+Given: $A(z=1) = 0.3413$, $A(z=2) = 0.4772$
+
+\textbf{Given Data:} $\mu = 50,\ \sigma = 10$
+
+\textbf{Part (a): $P(X > 70)$}
+\[
+Z = \frac{70-50}{10} = 2
+\]
+\[
+P(X > 70) = P(Z > 2) = 0.5 - A(z=2) = 0.5 - 0.4772 = \boxed{0.0228}
+\]
+
+\textbf{Part (b): $P(40 < X < 60)$}
+\[
+Z_1 = \frac{40-50}{10} = -1, \qquad Z_2 = \frac{60-50}{10} = 1
+\]
+\[
+P(40 < X < 60) = P(-1 < Z < 1) = 2 \times A(z=1) = 2 \times 0.3413 = \boxed{0.6826}
+\]
+
+\textbf{Part (c): Expected emails taking less than 30 ms}
+\[
+Z = \frac{30-50}{10} = -2
+\]
+\[
+P(X < 30) = P(Z < -2) = 0.5 - A(z=2) = 0.5 - 0.4772 = 0.0228
+\]
+\[
+\text{Expected emails} = 5000 \times 0.0228 = \boxed{114 \text{ emails}}
+\]
+
+\vspace{2em}
+\hrule
+\begin{center}
+\textit{End of Unit V -- Question Bank Answers}\\
+\textit{Course Faculty: Prof. R.S. Narale}
+\end{center}
+
+\end{document}
