@@ -1,73 +1,116 @@
-import java.io.File
-import java.time.LocalDateTime
-import kotlin.concurrent.thread
-import kotlin.random.Random
+import java.util.concurrent.ConcurrentLinkedQueue
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.math.sqrt
+import kotlin.system.measureTimeMillis
 
-object SystemInfo {
-    fun show() {
-        println("=== SYSTEM INFO ===")
-        println("OS        : ${System.getProperty("os.name")}")
-        println("User      : ${System.getProperty("user.name")}")
-        println("Java Ver  : ${System.getProperty("java.version")}")
-        println("Kotlin   : ${KotlinVersion.CURRENT}")
-        println("===================")
+data class PrimeResult(
+    val threadId: Int,
+    val primeCount: Int
+)
+
+class PrimeWorker(
+    private val id: Int,
+    private val jobs: ConcurrentLinkedQueue<Int>,
+    private val totalPrimes: AtomicInteger
+) : Runnable {
+
+    private fun isPrime(n: Int): Boolean {
+        if (n < 2) return false
+
+        val limit = sqrt(n.toDouble()).toInt()
+
+        for (i in 2..limit) {
+            if (n % i == 0) return false
+        }
+
+        return true
+    }
+
+    override fun run() {
+        var localCount = 0
+
+        while (true) {
+            val number = jobs.poll() ?: break
+
+            if (isPrime(number)) {
+                localCount++
+            }
+        }
+
+        totalPrimes.addAndGet(localCount)
+
+        println(
+            "Thread-$id finished -> $localCount primes"
+        )
     }
 }
 
-class Logger(private val fileName: String) {
-    fun log(msg: String) {
-        File(fileName).appendText("${LocalDateTime.now()} : $msg\n")
+class BenchmarkEngine(
+    private val maxNumber: Int,
+    private val workerCount: Int
+) {
+
+    fun execute() {
+
+        val jobs = ConcurrentLinkedQueue<Int>()
+
+        for (i in 2..maxNumber) {
+            jobs.add(i)
+        }
+
+        val totalPrimes = AtomicInteger(0)
+
+        val threads = mutableListOf<Thread>()
+
+        val elapsed = measureTimeMillis {
+
+            repeat(workerCount) { index ->
+
+                val worker =
+                    PrimeWorker(
+                        index + 1,
+                        jobs,
+                        totalPrimes
+                    )
+
+                val thread = Thread(worker)
+
+                threads.add(thread)
+
+                thread.start()
+            }
+
+            threads.forEach {
+                it.join()
+            }
+        }
+
+        println()
+        println("====================================")
+        println("Range Tested : 2 -> $maxNumber")
+        println("Workers      : $workerCount")
+        println("Prime Count  : ${totalPrimes.get()}")
+        println("Time Taken   : ${elapsed} ms")
+        println("====================================")
     }
 }
-
-fun cpuWork(limit: Int): Long =
-    (1..limit).sumOf { it.toLong() * it }
 
 fun main() {
-    SystemInfo.show()
 
-    val logger = Logger("log.txt")
-    logger.log("Program started")
+    val cpuCores =
+        Runtime.getRuntime().availableProcessors()
 
-    print("Enter your name: ")
-    val name = readLine().orEmpty()
+    println("====================================")
+    println("KOTLIN PRIME ANALYZER")
+    println("====================================")
+    println("CPU Cores : $cpuCores")
+    println()
 
-    println("\nWelcome, ${if (name.isBlank()) "Kotlin Dev" else name} 👋")
-    logger.log("User entered name: $name")
+    val engine =
+        BenchmarkEngine(
+            maxNumber = 5_000_000,
+            workerCount = cpuCores
+        )
 
-    println("\nRunning CPU tasks using threads...")
-
-    val limits = listOf(1_000_000, 2_000_000, 3_000_000, 4_000_000)
-    val results = mutableListOf<Long>()
-    val threads = mutableListOf<Thread>()
-
-    for (l in limits) {
-        val t = thread {
-            results += cpuWork(l)
-        }
-        threads += t
-    }
-
-    threads.forEach { it.join() }
-
-    val total = results.sum()
-    println("CPU Test Result: $total")
-    logger.log("CPU test completed")
-
-    println("\nGenerating random numbers...")
-    val nums = List(10) { Random.nextInt(0, 100) }
-    println("List   : $nums")
-    println("Sorted : ${nums.sorted()}")
-
-    logger.log("Collections tested")
-
-    println("\nSimulating workload...")
-    repeat(5) {
-        println("Task ${it + 1}/5 completed")
-        Thread.sleep(500)
-    }
-
-    println("\n✅ Kotlin compiler is WORKING!")
-    println("Log file created: log.txt")
-    logger.log("Program finished")
+    engine.execute()
 }
