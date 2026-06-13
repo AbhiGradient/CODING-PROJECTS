@@ -60,3 +60,13 @@ obj/
 
 # Env files
 .env
+
+#latex
+*.pdf
+*.aux
+*.log
+*.out
+*.toc
+*.synctex.gz
+*.fdb_latexmk
+*.fls
