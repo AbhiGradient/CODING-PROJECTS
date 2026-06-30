@@ -211,3 +211,15 @@ print(s3)
 mixed = {145, True, "hello"}
 print(mixed)
 
+a = {1,2,3,4}
+b = {4,5,6,7}
+print(a-b)
+print(a.difference(b))
+print(b-a)
+print(b.difference(a))
+print(a|b)
+print(a.intersection(b))
+print(a&b)
+print(a.union(b))
+print(a^b)
+
