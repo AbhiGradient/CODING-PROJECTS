@@ -197,3 +197,17 @@ b = 69
 a,b = b,a
 print(a,b)
 
+s = {1, 2, 3}
+print(s)
+print(type(s))
+
+list = [4, 5, 6]
+s2 = set(list)
+print(s2)
+
+s3 = set("hello")
+print(s3)
+
+mixed = {145, True, "hello"}
+print(mixed)
+
