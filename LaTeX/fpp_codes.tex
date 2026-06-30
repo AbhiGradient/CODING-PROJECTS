@@ -1,0 +1,1165 @@
+\documentclass[12pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{margin=1in}
+\usepackage{amsmath,amssymb}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\lstset{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+  showstringspaces=false,
+  breaklines=true,
+  breakatwhitespace=true,
+  columns=fullflexible,
+  keepspaces=true
+}
+\newenvironment{qbox}[1]{\par\bigskip\noindent\textbf{#1}\par}{\par\medskip}
+\newcommand{\1}{Question}
+\newcommand{\method}[1]{\par\medskip\noindent\textbf{#1}\par}
+\newcommand{\logicbox}[1]{\par\smallskip\noindent\textit{#1}\par}
+\newcommand{\inout}[2]{\par\smallskip\noindent\textbf{Input:} #1\\\textbf{Output:} #2\par}
+
+\begin{document}
+
+\section{Unit 3: Strings (Q13--Q21)}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using a \texttt{for} loop}
+\logicbox{Start with an empty string. Walk through the original string from left to right and keep adding each new character to the \textbf{front} of the result. This naturally builds the reverse.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+reversed_str = ""
+
+for ch in s:
+    reversed_str = ch + reversed_str
+
+print("Reversed string:", reversed_str)
+\end{lstlisting}
+\inout{hello}{Reversed string: olleh}
+
+\method{2 -- Using a \texttt{while} loop and index}
+\logicbox{Start an index pointer at the last character (\texttt{len(s)-1}) and move backwards to 0, appending each character to a new string.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+i = len(s) - 1
+reversed_str = ""
+
+while i >= 0:
+    reversed_str += s[i]
+    i -= 1
+
+print("Reversed string:", reversed_str)
+\end{lstlisting}
+\inout{hello}{Reversed string: olleh}
+
+\method{3 -- Using recursion}
+\logicbox{The reverse of a string equals its last character followed by the reverse of the remaining (n-1) characters. This is applied repeatedly until the string is empty.}
+\begin{lstlisting}
+def reverse_string(s):
+    if len(s) == 0:
+        return s
+    return reverse_string(s[1:]) + s[0]
+
+s = input("Enter a string: ")
+print("Reversed string:", reverse_string(s))
+\end{lstlisting}
+\inout{hello}{Reversed string: olleh}
+
+\method{4 -- Using slicing (allowed since slicing is an operator, not a built-in function)}
+\logicbox{Python slicing \texttt{s[::-1]} means start at the end and step backwards by 1 through the whole string. Mention this as a bonus ``Pythonic'' one-liner if the question allows built-ins for comparison.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+reversed_str = s[::-1]
+print("Reversed string:", reversed_str)
+\end{lstlisting}
+\inout{hello}{Reversed string: olleh}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using slicing}
+\logicbox{A string is a palindrome if it reads the same forwards and backwards. Reverse the string using slicing and compare it with the original.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+
+if s == s[::-1]:
+    print(s, "is a palindrome")
+else:
+    print(s, "is not a palindrome")
+\end{lstlisting}
+\inout{madam}{madam is a palindrome}
+
+\method{2 -- Using a loop (two-pointer technique)}
+\logicbox{Use two pointers, one starting at the beginning and one at the end. Compare characters and move pointers towards the centre. If any pair mismatches, it is not a palindrome.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+left = 0
+right = len(s) - 1
+is_palindrome = True
+
+while left < right:
+    if s[left] != s[right]:
+        is_palindrome = False
+        break
+    left += 1
+    right -= 1
+
+if is_palindrome:
+    print(s, "is a palindrome")
+else:
+    print(s, "is not a palindrome")
+\end{lstlisting}
+\inout{madam}{madam is a palindrome}
+
+\method{3 -- Using recursion}
+\logicbox{A string is a palindrome if its first and last characters match and the substring in between is also a palindrome. The base case is a string of length 0 or 1.}
+\begin{lstlisting}
+def is_palindrome(s):
+    if len(s) <= 1:
+        return True
+    if s[0] != s[-1]:
+        return False
+    return is_palindrome(s[1:-1])
+
+s = input("Enter a string: ")
+if is_palindrome(s):
+    print(s, "is a palindrome")
+else:
+    print(s, "is not a palindrome")
+\end{lstlisting}
+\inout{madam}{madam is a palindrome}
+
+\method{4 -- Using \texttt{reversed()} and \texttt{join()}}
+\logicbox{The built-in \texttt{reversed()} returns an iterator of characters in reverse order; \texttt{join()} combines them back into a string for comparison.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+rev = "".join(reversed(s))
+
+if s == rev:
+    print(s, "is a palindrome")
+else:
+    print(s, "is not a palindrome")
+\end{lstlisting}
+\inout{madam}{madam is a palindrome}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using a \texttt{for} loop and \texttt{if-elif}}
+\logicbox{Convert the string to lowercase so case does not matter. Traverse each character; if it is an alphabet and belongs to ``aeiou'', increment the vowel counter, otherwise increment the consonant counter.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+s = s.lower()
+vowels = 0
+consonants = 0
+
+for ch in s:
+    if ch.isalpha():
+        if ch in "aeiou":
+            vowels += 1
+        else:
+            consonants += 1
+
+print("Vowels:", vowels)
+print("Consonants:", consonants)
+\end{lstlisting}
+\inout{Hello World}{Vowels: 3\\Consonants: 7}
+
+\method{2 -- Using a \texttt{while} loop with index}
+\logicbox{Same logic as Method 1, but traversal is done manually using an index and \texttt{while} loop instead of a \texttt{for} loop.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+s = s.lower()
+i = 0
+vowels = 0
+consonants = 0
+
+while i < len(s):
+    ch = s[i]
+    if ch.isalpha():
+        if ch in "aeiou":
+            vowels += 1
+        else:
+            consonants += 1
+    i += 1
+
+print("Vowels:", vowels)
+print("Consonants:", consonants)
+\end{lstlisting}
+\inout{Hello World}{Vowels: 3\\Consonants: 7}
+
+\method{3 -- Using list comprehension and \texttt{count()} / \texttt{sum()}}
+\logicbox{Use \texttt{sum()} with a generator expression that yields 1 for every character meeting the vowel/consonant condition. This is a compact, Pythonic approach.}
+\begin{lstlisting}
+s = input("Enter a string: ").lower()
+
+vowels = sum(1 for ch in s if ch in "aeiou")
+consonants = sum(1 for ch in s if ch.isalpha() and ch not in "aeiou")
+
+print("Vowels:", vowels)
+print("Consonants:", consonants)
+\end{lstlisting}
+\inout{Hello World}{Vowels: 3\\Consonants: 7}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{Q16. Write a program in Python to find length of a string without using \texttt{len()}.}
+
+\method{1 -- Using a \texttt{for} loop and counter}
+\logicbox{Initialise a counter to 0. For every character encountered while traversing the string, increase the counter by 1. The final counter value is the length.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+count = 0
+
+for ch in s:
+    count += 1
+
+print("Length of string:", count)
+\end{lstlisting}
+\inout{python}{Length of string: 6}
+
+\method{2 -- Using a \texttt{while} loop with \texttt{try-except}}
+\logicbox{Keep increasing an index and try to access \texttt{s[index]}. When the index goes out of range, Python raises an \texttt{IndexError}; that index value is the length.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+count = 0
+
+while True:
+    try:
+        ch = s[count]
+        count += 1
+    except IndexError:
+        break
+
+print("Length of string:", count)
+\end{lstlisting}
+\inout{python}{Length of string: 6}
+
+\method{3 -- Using recursion}
+\logicbox{The length of a string equals 1 (for the first character) plus the length of the rest of the string. The base case is an empty string, whose length is 0.}
+\begin{lstlisting}
+def find_length(s):
+    if s == "":
+        return 0
+    return 1 + find_length(s[1:])
+
+s = input("Enter a string: ")
+print("Length of string:", find_length(s))
+\end{lstlisting}
+\inout{python}{Length of string: 6}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using built-in \texttt{swapcase()}}
+\logicbox{Python's string method \texttt{swapcase()} automatically converts every uppercase letter to lowercase and every lowercase letter to uppercase in a single call.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = s.swapcase()
+print("Converted string:", result)
+\end{lstlisting}
+\inout{Hello World}{Converted string: hELLO wORLD}
+
+\method{2 -- Using \texttt{upper()} and \texttt{lower()} with manual logic}
+\logicbox{Check each character: if it is uppercase, convert to lowercase using \texttt{lower()}; if it is lowercase, convert to uppercase using \texttt{upper()}; otherwise keep it unchanged. Build the result character by character.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = ""
+
+for ch in s:
+    if ch.isupper():
+        result += ch.lower()
+    elif ch.islower():
+        result += ch.upper()
+    else:
+        result += ch
+
+print("Converted string:", result)
+\end{lstlisting}
+\inout{Hello World}{Converted string: hELLO wORLD}
+
+\method{3 -- Using ASCII values}
+\logicbox{Uppercase letters lie between ASCII 65--90 and lowercase letters between 97--122, a fixed gap of 32. Add or subtract 32 to switch case, using \texttt{ord()} and \texttt{chr()} for conversion.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = ""
+
+for ch in s:
+    code = ord(ch)
+    if 65 <= code <= 90:        # Uppercase A-Z
+        result += chr(code + 32)
+    elif 97 <= code <= 122:     # Lowercase a-z
+        result += chr(code - 32)
+    else:
+        result += ch
+
+print("Converted string:", result)
+\end{lstlisting}
+\inout{Hello World}{Converted string: hELLO wORLD}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using built-in \texttt{replace()}}
+\logicbox{\texttt{replace(" ", "")} scans the string and replaces every occurrence of a space character with an empty string, effectively deleting all spaces.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = s.replace(" ", "")
+print("String without spaces:", result)
+\end{lstlisting}
+\inout{P y t h o n}{String without spaces: Python}
+
+\method{2 -- Using a loop and condition}
+\logicbox{Traverse each character; if the character is not a space, append it to a new result string. Spaces are simply skipped.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = ""
+
+for ch in s:
+    if ch != " ":
+        result += ch
+
+print("String without spaces:", result)
+\end{lstlisting}
+\inout{P y t h o n}{String without spaces: Python}
+
+\method{3 -- Using \texttt{join()} with split()}
+\logicbox{\texttt{split()} breaks the string into a list of words wherever there are spaces; \texttt{join("")} then sticks all the words back together with nothing in between, removing the gaps.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = "".join(s.split())
+print("String without spaces:", result)
+\end{lstlisting}
+\inout{P y t h o n}{String without spaces: Python}
+
+\method{4 -- Using list comprehension}
+\logicbox{A compact one-line version of Method 2: build a list of all non-space characters using a comprehension, then join them.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+result = "".join([ch for ch in s if ch != " "])
+print("String without spaces:", result)
+\end{lstlisting}
+\inout{P y t h o n}{String without spaces: Python}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using a dictionary and loop}
+\logicbox{Create an empty dictionary. For each character in the string, if it already exists as a key, increase its count by 1; otherwise add it with a count of 1.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+freq = {}
+
+for ch in s:
+    if ch in freq:
+        freq[ch] += 1
+    else:
+        freq[ch] = 1
+
+for key, value in freq.items():
+    print(key, ":", value)
+\end{lstlisting}
+\inout{apple}{a : 1\\p : 2\\l : 1\\e : 1}
+
+\method{2 -- Using \texttt{dict.get()}}
+\logicbox{\texttt{get(ch, 0)} returns the current count for a character, or 0 if it is not yet in the dictionary, allowing the increment to be written in a single line.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+freq = {}
+
+for ch in s:
+    freq[ch] = freq.get(ch, 0) + 1
+
+for key, value in freq.items():
+    print(key, ":", value)
+\end{lstlisting}
+\inout{apple}{a : 1\\p : 2\\l : 1\\e : 1}
+
+\method{3 -- Using the \texttt{count()} method with a set}
+\logicbox{Convert the string to a \texttt{set} to get only the unique characters, then for each unique character use \texttt{count()} to find how many times it appears in the original string.}
+\begin{lstlisting}
+s = input("Enter a string: ")
+
+for ch in set(s):
+    print(ch, ":", s.count(ch))
+\end{lstlisting}
+\inout{apple}{a : 1\\p : 2\\l : 1\\e : 1}
+
+\method{4 -- Using \texttt{collections.Counter}}
+\logicbox{The \texttt{Counter} class from the \texttt{collections} module automatically builds a frequency dictionary-like object from any iterable, including a string.}
+\begin{lstlisting}
+from collections import Counter
+
+s = input("Enter a string: ")
+freq = Counter(s)
+
+for key, value in freq.items():
+    print(key, ":", value)
+\end{lstlisting}
+\inout{apple}{a : 1\\p : 2\\l : 1\\e : 1}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using built-in \texttt{split()}}
+\logicbox{\texttt{split()} (with no arguments) breaks the sentence into a list of words wherever there is whitespace. The number of words is simply the length of this list.}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+print("Number of words:", len(words))
+\end{lstlisting}
+\inout{Python is a powerful language}{Number of words: 5}
+
+\method{2 -- Using a loop and counting spaces}
+\logicbox{A sentence with n words usually has (n-1) single spaces between them. By counting transitions from a space to a non-space character, we can count words without using \texttt{split()}.}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+count = 0
+i = 0
+
+while i < len(sentence):
+    if sentence[i] != " " and (i == 0 or sentence[i-1] == " "):
+        count += 1
+    i += 1
+
+print("Number of words:", count)
+\end{lstlisting}
+\inout{Python is a powerful language}{Number of words: 5}
+
+\method{3 -- Using \texttt{re} module (regular expressions)}
+\logicbox{\texttt{re.findall(r'\textbackslash w+', sentence)} finds all sequences of word characters (letters/digits/underscore), effectively extracting every word regardless of how many spaces separate them.}
+\begin{lstlisting}
+import re
+
+sentence = input("Enter a sentence: ")
+words = re.findall(r'\w+', sentence)
+print("Number of words:", len(words))
+\end{lstlisting}
+\inout{Python is a powerful language}{Number of words: 5}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using a loop with \texttt{split()}}
+\logicbox{Split the sentence into a list of words. Initialise both ``largest'' and ``smallest'' with the first word, then compare each subsequent word's length and update accordingly.}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+
+largest = words[0]
+smallest = words[0]
+
+for word in words:
+    if len(word) > len(largest):
+        largest = word
+    if len(word) < len(smallest):
+        smallest = word
+
+print("Largest word:", largest)
+print("Smallest word:", smallest)
+\end{lstlisting}
+\inout{The elephant is a big animal}{Largest word: elephant\\Smallest word: a}
+
+\method{2 -- Using built-in \texttt{max()} and \texttt{min()} with \texttt{key=len}}
+\logicbox{\texttt{max()} and \texttt{min()} accept a \texttt{key} function that decides what to compare. Using \texttt{key=len} tells Python to compare words by their length instead of alphabetically.}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+
+largest = max(words, key=len)
+smallest = min(words, key=len)
+
+print("Largest word:", largest)
+print("Smallest word:", smallest)
+\end{lstlisting}
+\inout{The elephant is a big animal}{Largest word: elephant\\Smallest word: a}
+
+\method{3 -- Using sorting}
+\logicbox{Sort the list of words by their length using \texttt{sorted()} with \texttt{key=len}. After sorting, the first element is the smallest word and the last element is the largest word.}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+sorted_words = sorted(words, key=len)
+
+print("Smallest word:", sorted_words[0])
+print("Largest word:", sorted_words[-1])
+\end{lstlisting}
+\inout{The elephant is a big animal}{Smallest word: a\\Largest word: elephant}
+\end{qbox}
+
+\end{document}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using \texttt{for} loop (direct iteration)}
+\logicbox{A \texttt{for} loop in Python can directly iterate over the elements of a list one by one without needing an index.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+
+for item in my_list:
+    print(item)
+\end{lstlisting}
+\inout{(list defined in code: [10, 20, 30, 40, 50])}{10\\20\\30\\40\\50}
+
+\method{2 -- Using \texttt{for} loop with \texttt{range()} and index}
+\logicbox{\texttt{range(len(my\_list))} generates index numbers from 0 to length-1. Each index is then used to access the corresponding element with \texttt{my\_list[i]}.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+
+for i in range(len(my_list)):
+    print(my_list[i])
+\end{lstlisting}
+\inout{(list defined in code: [10, 20, 30, 40, 50])}{10\\20\\30\\40\\50}
+
+\method{3 -- Using \texttt{while} loop}
+\logicbox{Manually maintain an index starting at 0. Print the element at that index, then increment the index until it reaches the list's length.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+i = 0
+
+while i < len(my_list):
+    print(my_list[i])
+    i += 1
+\end{lstlisting}
+\inout{(list defined in code: [10, 20, 30, 40, 50])}{10\\20\\30\\40\\50}
+
+\method{4 -- Using \texttt{enumerate()}}
+\logicbox{\texttt{enumerate()} returns both the index and the value for every element, useful when both pieces of information are needed together.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+
+for index, value in enumerate(my_list):
+    print("Index", index, ":", value)
+\end{lstlisting}
+\inout{(list defined in code: [10, 20, 30, 40, 50])}{Index 0 : 10\\Index 1 : 20\\Index 2 : 30\\Index 3 : 40\\Index 4 : 50}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using built-in \texttt{max()} and \texttt{min()}}
+\logicbox{Python's built-in \texttt{max()} and \texttt{min()} functions directly scan the whole list and return the largest and smallest values respectively.}
+\begin{lstlisting}
+my_list = [23, 5, 67, 12, 89, 34]
+
+largest = max(my_list)
+smallest = min(my_list)
+
+print("Largest element:", largest)
+print("Smallest element:", smallest)
+\end{lstlisting}
+\inout{(list defined in code: [23, 5, 67, 12, 89, 34])}{Largest element: 89\\Smallest element: 5}
+
+\method{2 -- Using a loop (manual comparison)}
+\logicbox{Assume the first element is both the largest and smallest. Traverse the rest of the list, updating the largest whenever a bigger value is found and the smallest whenever a smaller value is found.}
+\begin{lstlisting}
+my_list = [23, 5, 67, 12, 89, 34]
+
+largest = my_list[0]
+smallest = my_list[0]
+
+for num in my_list:
+    if num > largest:
+        largest = num
+    if num < smallest:
+        smallest = num
+
+print("Largest element:", largest)
+print("Smallest element:", smallest)
+\end{lstlisting}
+\inout{(list defined in code: [23, 5, 67, 12, 89, 34])}{Largest element: 89\\Smallest element: 5}
+
+\method{3 -- Using sorting}
+\logicbox{Sorting the list in ascending order places the smallest element first and the largest element last; they can then be accessed using index 0 and -1.}
+\begin{lstlisting}
+my_list = [23, 5, 67, 12, 89, 34]
+sorted_list = sorted(my_list)
+
+print("Smallest element:", sorted_list[0])
+print("Largest element:", sorted_list[-1])
+\end{lstlisting}
+\inout{(list defined in code: [23, 5, 67, 12, 89, 34])}{Smallest element: 5\\Largest element: 89}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{Single demonstration covering all four functions}
+\logicbox{\texttt{append()} adds an element at the end. \texttt{insert(index, value)} places an element at a specific position. \texttt{remove(value)} deletes the first matching value. \texttt{pop(index)} removes and returns the element at a given index (or the last element if no index is given).}
+\begin{lstlisting}
+fruits = ["apple", "banana", "cherry"]
+print("Original list:", fruits)
+
+# append() - adds element at the end
+fruits.append("mango")
+print("After append('mango'):", fruits)
+
+# insert() - adds element at a specific position
+fruits.insert(1, "orange")
+print("After insert(1,'orange'):", fruits)
+
+# remove() - removes first matching element
+fruits.remove("banana")
+print("After remove('banana'):", fruits)
+
+# pop() - removes element at given index (default: last)
+popped_item = fruits.pop(2)
+print("Popped item:", popped_item)
+print("After pop(2):", fruits)
+\end{lstlisting}
+\inout{(list defined in code: ["apple","banana","cherry"])}{Original list: ['apple', 'banana', 'cherry']\\After append('mango'): ['apple', 'banana', 'cherry', 'mango']\\After insert(1,'orange'): ['apple', 'orange', 'banana', 'cherry', 'mango']\\After remove('banana'): ['apple', 'orange', 'cherry', 'mango']\\Popped item: cherry\\After pop(2): ['apple', 'orange', 'mango']}
+
+\method{Alternative -- using \texttt{del} and slicing instead of remove/pop}
+\logicbox{Besides the dedicated methods, Python also allows deleting elements using the \texttt{del} statement with an index or a slice, offering another way to remove items.}
+\begin{lstlisting}
+fruits = ["apple", "banana", "cherry", "mango"]
+print("Original list:", fruits)
+
+del fruits[1]              # removes element at index 1 ("banana")
+print("After del fruits[1]:", fruits)
+
+del fruits[0:2]            # removes a slice of elements
+print("After del fruits[0:2]:", fruits)
+\end{lstlisting}
+\inout{(list defined in code: ["apple","banana","cherry","mango"])}{Original list: ['apple', 'banana', 'cherry', 'mango']\\After del fruits[1]: ['apple', 'cherry', 'mango']\\After del fruits[0:2]: ['mango']}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using direct double indexing}
+\logicbox{A nested list is a list containing other lists as elements. The outer index selects which inner list (row) to use, and the inner index selects an element within that row, written as \texttt{list[row][col]}.}
+\begin{lstlisting}
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+print("Full nested list:", matrix)
+print("Element at row 0, col 0:", matrix[0][0])
+print("Element at row 1, col 2:", matrix[1][2])
+print("Element at row 2, col 1:", matrix[2][1])
+\end{lstlisting}
+\inout{(matrix defined in code)}{Full nested list: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\\Element at row 0, col 0: 1\\Element at row 1, col 2: 6\\Element at row 2, col 1: 8}
+
+\method{2 -- Using nested loops to access all elements}
+\logicbox{An outer loop selects each inner list (row), and an inner loop goes through each element of that row, allowing every element of the nested list to be printed systematically.}
+\begin{lstlisting}
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+for row in matrix:
+    for element in row:
+        print(element, end=" ")
+    print()
+\end{lstlisting}
+\inout{(matrix defined in code)}{1 2 3 \\4 5 6 \\7 8 9 }
+
+\method{3 -- Using list comprehension to flatten and access}
+\logicbox{A nested list comprehension can flatten the 2D list into a single 1D list, after which normal indexing can be used to access any element by its overall position.}
+\begin{lstlisting}
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+flat_list = [element for row in matrix for element in row]
+print("Flattened list:", flat_list)
+print("5th element overall:", flat_list[4])
+\end{lstlisting}
+\inout{(matrix defined in code)}{Flattened list: [1, 2, 3, 4, 5, 6, 7, 8, 9]\\5th element overall: 5}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using list comprehension (the required method)}
+\logicbox{List comprehension provides a compact way to build a new list: for every number \texttt{x} taken from \texttt{range(1,11)}, the expression \texttt{x*x} is computed and collected into a new list.}
+\begin{lstlisting}
+squares = [x*x for x in range(1, 11)]
+print("Squares from 1 to 10:", squares)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Squares from 1 to 10: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]}
+
+\method{2 -- Using a \texttt{for} loop (traditional method, for comparison)}
+\logicbox{Start with an empty list. For each number from 1 to 10, compute its square and append it to the list — the long-hand equivalent of the comprehension above.}
+\begin{lstlisting}
+squares = []
+
+for x in range(1, 11):
+    squares.append(x*x)
+
+print("Squares from 1 to 10:", squares)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Squares from 1 to 10: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]}
+
+\method{3 -- Using \texttt{map()} with \texttt{lambda}}
+\logicbox{\texttt{map()} applies a given function (here a lambda that squares a number) to every item of an iterable (\texttt{range(1,11)}), producing a map object which is converted to a list.}
+\begin{lstlisting}
+squares = list(map(lambda x: x*x, range(1, 11)))
+print("Squares from 1 to 10:", squares)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Squares from 1 to 10: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using the \texttt{in} operator}
+\logicbox{The \texttt{in} operator checks if a value exists inside a list and returns \texttt{True} or \texttt{False} directly, without needing a manual loop.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+element = int(input("Enter element to search: "))
+
+if element in my_list:
+    print(element, "is present in the list")
+else:
+    print(element, "is not present in the list")
+\end{lstlisting}
+\inout{30}{30 is present in the list}
+
+\method{2 -- Using the \texttt{not in} operator}
+\logicbox{\texttt{not in} is the logical opposite of \texttt{in}; it returns \texttt{True} when the element is absent from the list, which can be used to phrase the check the other way around.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+element = int(input("Enter element to search: "))
+
+if element not in my_list:
+    print(element, "is not present in the list")
+else:
+    print(element, "is present in the list")
+\end{lstlisting}
+\inout{60}{60 is not present in the list}
+
+\method{3 -- Using a manual loop (for comparison, without membership operator)}
+\logicbox{Traverse the entire list and compare each element with the target value. If a match is found at any point, set a flag to \texttt{True} and stop searching.}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+element = int(input("Enter element to search: "))
+found = False
+
+for item in my_list:
+    if item == element:
+        found = True
+        break
+
+if found:
+    print(element, "is present in the list")
+else:
+    print(element, "is not present in the list")
+\end{lstlisting}
+\inout{30}{30 is present in the list}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Basic packing and unpacking}
+\logicbox{\textbf{Packing} is combining multiple values into a single tuple by simply separating them with commas. \textbf{Unpacking} is the reverse: assigning the tuple's individual values to separate variables in one statement.}
+\begin{lstlisting}
+# Packing: combining values into a tuple
+student = "Abhishek", 20, "AI&DS"
+print("Packed tuple:", student)
+
+# Unpacking: extracting values from the tuple
+name, age, branch = student
+print("Name:", name)
+print("Age:", age)
+print("Branch:", branch)
+\end{lstlisting}
+\inout{(values fixed in code)}{Packed tuple: ('Abhishek', 20, 'AI\&DS')\\Name: Abhishek\\Age: 20\\Branch: AI\&DS}
+
+\method{2 -- Unpacking with the \texttt{*} (asterisk) operator}
+\logicbox{When the number of variables is fewer than the tuple's elements, using \texttt{*} before a variable name collects all the remaining/extra values into a list, while the other variables take single values.}
+\begin{lstlisting}
+numbers = (1, 2, 3, 4, 5)
+
+first, *middle, last = numbers
+
+print("First:", first)
+print("Middle:", middle)
+print("Last:", last)
+\end{lstlisting}
+\inout{(tuple fixed in code: (1,2,3,4,5))}{First: 1\\Middle: [2, 3, 4]\\Last: 5}
+
+\method{3 -- Swapping two variables using tuple packing/unpacking}
+\logicbox{Python allows swapping values of two variables in a single line: the right side \texttt{(b, a)} is first packed into a temporary tuple, then unpacked into \texttt{a, b} on the left side, achieving a swap without a temporary variable.}
+\begin{lstlisting}
+a = 5
+b = 10
+print("Before swap: a =", a, ", b =", b)
+
+a, b = b, a
+
+print("After swap: a =", a, ", b =", b)
+\end{lstlisting}
+\inout{(values fixed in code: a=5, b=10)}{Before swap: a = 5 , b = 10\\After swap: a = 10 , b = 5}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using the comparison operator \texttt{==}}
+\logicbox{Python tuples can be compared directly using \texttt{==}; the comparison checks both length and element values (in the same order) automatically.}
+\begin{lstlisting}
+tuple1 = (1, 2, 3)
+tuple2 = (1, 2, 3)
+
+if tuple1 == tuple2:
+    print("Tuples are equal")
+else:
+    print("Tuples are not equal")
+\end{lstlisting}
+\inout{(tuples fixed in code: (1,2,3) and (1,2,3))}{Tuples are equal}
+
+\method{2 -- Using a manual loop (element-by-element comparison)}
+\logicbox{First check whether the lengths match. If they do, compare every corresponding pair of elements one by one; if any pair differs, the tuples are not equal.}
+\begin{lstlisting}
+tuple1 = (1, 2, 3)
+tuple2 = (1, 2, 4)
+equal = True
+
+if len(tuple1) != len(tuple2):
+    equal = False
+else:
+    for i in range(len(tuple1)):
+        if tuple1[i] != tuple2[i]:
+            equal = False
+            break
+
+if equal:
+    print("Tuples are equal")
+else:
+    print("Tuples are not equal")
+\end{lstlisting}
+\inout{(tuples fixed in code: (1,2,3) and (1,2,4))}{Tuples are not equal}
+
+\method{3 -- Using \texttt{sorted()} to check equality regardless of order}
+\logicbox{If the requirement is to check whether two tuples contain the same elements regardless of their order, sort both tuples first and then compare the sorted results.}
+\begin{lstlisting}
+tuple1 = (3, 1, 2)
+tuple2 = (1, 2, 3)
+
+if sorted(tuple1) == sorted(tuple2):
+    print("Tuples have the same elements (order ignored)")
+else:
+    print("Tuples are different")
+\end{lstlisting}
+\inout{(tuples fixed in code: (3,1,2) and (1,2,3))}{Tuples have the same elements (order ignored)}
+\end{qbox}
+\newpage
+\section{Unit 5: Sets and Dictionaries (Q11--Q18)}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using \texttt{add()} and \texttt{remove()}}
+\logicbox{\texttt{add()} inserts a single new element into a set (sets automatically ignore duplicates). \texttt{remove()} deletes a specified element, but raises an error if the element does not exist.}
+\begin{lstlisting}
+my_set = {1, 2, 3, 4}
+print("Original set:", my_set)
+
+my_set.add(5)
+print("After add(5):", my_set)
+
+my_set.remove(2)
+print("After remove(2):", my_set)
+\end{lstlisting}
+\inout{(set defined in code: \{1,2,3,4\})}{Original set: \{1, 2, 3, 4\}\\After add(5): \{1, 2, 3, 4, 5\}\\After remove(2): \{1, 3, 4, 5\}}
+
+\method{2 -- Using \texttt{discard()} and \texttt{update()}}
+\logicbox{\texttt{discard()} also removes an element but, unlike \texttt{remove()}, does not raise an error if the element is absent. \texttt{update()} adds multiple elements at once from another iterable.}
+\begin{lstlisting}
+my_set = {1, 2, 3, 4}
+print("Original set:", my_set)
+
+my_set.update([5, 6, 7])
+print("After update([5,6,7]):", my_set)
+
+my_set.discard(10)   # no error even though 10 is not present
+print("After discard(10):", my_set)
+
+my_set.discard(3)
+print("After discard(3):", my_set)
+\end{lstlisting}
+\inout{(set defined in code: \{1,2,3,4\})}{Original set: \{1, 2, 3, 4\}\\After update([5,6,7]): \{1, 2, 3, 4, 5, 6, 7\}\\After discard(10): \{1, 2, 3, 4, 5, 6, 7\}\\After discard(3): \{1, 2, 4, 5, 6, 7\}}
+
+\method{3 -- Using \texttt{pop()} and \texttt{clear()}}
+\logicbox{\texttt{pop()} removes and returns an arbitrary element from the set (sets are unordered, so the removed element cannot be predicted). \texttt{clear()} empties the set completely.}
+\begin{lstlisting}
+my_set = {1, 2, 3, 4}
+print("Original set:", my_set)
+
+removed_item = my_set.pop()
+print("Removed item:", removed_item)
+print("After pop():", my_set)
+
+my_set.clear()
+print("After clear():", my_set)
+\end{lstlisting}
+\inout{(set defined in code: \{1,2,3,4\})}{Original set: \{1, 2, 3, 4\}\\Removed item: 1 (may vary)\\After pop(): \{2, 3, 4\}\\After clear(): set()}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using built-in operators (\texttt{|} and \texttt{\&})}
+\logicbox{The \texttt{|} operator combines all elements from both sets (union), while the \texttt{\&} operator keeps only elements that are common to both sets (intersection).}
+\begin{lstlisting}
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+union_result = set1 | set2
+intersection_result = set1 & set2
+
+print("Set 1:", set1)
+print("Set 2:", set2)
+print("Union:", union_result)
+print("Intersection:", intersection_result)
+\end{lstlisting}
+\inout{(sets defined in code)}{Set 1: \{1, 2, 3, 4, 5\}\\Set 2: \{4, 5, 6, 7, 8\}\\Union: \{1, 2, 3, 4, 5, 6, 7, 8\}\\Intersection: \{4, 5\}}
+
+\method{2 -- Using built-in methods \texttt{union()} and \texttt{intersection()}}
+\logicbox{Sets provide explicit method names that do exactly the same job as the operators above: \texttt{union()} merges both sets and \texttt{intersection()} finds common elements.}
+\begin{lstlisting}
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+union_result = set1.union(set2)
+intersection_result = set1.intersection(set2)
+
+print("Union:", union_result)
+print("Intersection:", intersection_result)
+\end{lstlisting}
+\inout{(sets defined in code)}{Union: \{1, 2, 3, 4, 5, 6, 7, 8\}\\Intersection: \{4, 5\}}
+
+\method{3 -- Using a manual loop (without built-in set operators)}
+\logicbox{For union, start with all elements of the first set and add any element from the second set not already present. For intersection, keep only those elements of the first set that also appear in the second set.}
+\begin{lstlisting}
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+union_result = set(set1)
+for item in set2:
+    union_result.add(item)
+
+intersection_result = set()
+for item in set1:
+    if item in set2:
+        intersection_result.add(item)
+
+print("Union:", union_result)
+print("Intersection:", intersection_result)
+\end{lstlisting}
+\inout{(sets defined in code)}{Union: \{1, 2, 3, 4, 5, 6, 7, 8\}\\Intersection: \{4, 5\}}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using the \texttt{in} operator}
+\logicbox{The \texttt{in} operator works on sets just like it does on lists; it returns \texttt{True} if the element exists in the set, checked very efficiently due to the hashed structure of sets.}
+\begin{lstlisting}
+my_set = {10, 20, 30, 40}
+element = int(input("Enter element to search: "))
+
+if element in my_set:
+    print(element, "is present in the set")
+else:
+    print(element, "is not present in the set")
+\end{lstlisting}
+\inout{20}{20 is present in the set}
+
+\method{2 -- Using the \texttt{not in} operator}
+\logicbox{\texttt{not in} returns \texttt{True} when the element does not exist in the set, providing the negated form of the membership check.}
+\begin{lstlisting}
+my_set = {10, 20, 30, 40}
+element = int(input("Enter element to search: "))
+
+if element not in my_set:
+    print(element, "is not present in the set")
+else:
+    print(element, "is present in the set")
+\end{lstlisting}
+\inout{50}{50 is not present in the set}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using set comprehension (the required method)}
+\logicbox{Set comprehension follows the same syntax as list comprehension but uses curly braces \texttt{\{\}}. For each number \texttt{x} in the given range, \texttt{x*x} is computed and added to the set; duplicates (if any) are automatically removed.}
+\begin{lstlisting}
+squares_set = {x*x for x in range(1, 11)}
+print("Set of squares:", squares_set)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Set of squares: \{1, 4, 9, 16, 25, 36, 49, 64, 81, 100\}}
+
+\method{2 -- Using a loop and \texttt{add()} (traditional method, for comparison)}
+\logicbox{Start with an empty set. For every number in the range, compute its square and add it to the set using \texttt{add()} — the long-hand equivalent of the comprehension above.}
+\begin{lstlisting}
+squares_set = set()
+
+for x in range(1, 11):
+    squares_set.add(x*x)
+
+print("Set of squares:", squares_set)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Set of squares: \{1, 4, 9, 16, 25, 36, 49, 64, 81, 100\}}
+
+\method{3 -- Using \texttt{set()} constructor with \texttt{map()}}
+\logicbox{\texttt{map()} applies the squaring lambda function to every value of \texttt{range(1,11)}, and wrapping the result with \texttt{set()} converts it into a set, removing any duplicate values.}
+\begin{lstlisting}
+squares_set = set(map(lambda x: x*x, range(1, 11)))
+print("Set of squares:", squares_set)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Set of squares: \{1, 4, 9, 16, 25, 36, 49, 64, 81, 100\}}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using \texttt{for} loop with \texttt{items()}}
+\logicbox{\texttt{items()} returns each key-value pair in the dictionary together, allowing both to be printed in a single loop iteration.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+
+for key, value in student.items():
+    print(key, ":", value)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{name : Abhishek\\age : 20\\branch : AI\&DS}
+
+\method{2 -- Using \texttt{for} loop with \texttt{keys()}}
+\logicbox{\texttt{keys()} returns only the keys of the dictionary; each key can then be used inside the loop to look up its corresponding value with \texttt{student[key]}.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+
+for key in student.keys():
+    print(key, ":", student[key])
+\end{lstlisting}
+\inout{(dictionary defined in code)}{name : Abhishek\\age : 20\\branch : AI\&DS}
+
+\method{3 -- Printing the dictionary directly}
+\logicbox{Simply passing the dictionary object to \texttt{print()} displays the whole structure (all keys and values) at once, without needing a loop.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+print("Dictionary:", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Dictionary: \{'name': 'Abhishek', 'age': 20, 'branch': 'AI\&DS'\}}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using square bracket notation}
+\logicbox{Values are accessed by writing the key inside square brackets: \texttt{dict[key]}. The same notation is used to update a value by assigning a new value to that key.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+
+# Accessing a value
+print("Current age:", student["age"])
+
+# Updating a value
+student["age"] = 21
+print("Updated age:", student["age"])
+print("Full dictionary:", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Current age: 20\\Updated age: 21\\Full dictionary: \{'name': 'Abhishek', 'age': 21, 'branch': 'AI\&DS'\}}
+
+\method{2 -- Using \texttt{get()} for access and \texttt{update()} for updating}
+\logicbox{\texttt{get(key)} safely retrieves a value without raising an error if the key is missing (it returns \texttt{None} instead). \texttt{update()} can modify one or more key-value pairs at once using another dictionary.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+
+# Accessing a value safely
+print("Current branch:", student.get("branch"))
+print("Non-existent key:", student.get("marks"))  # returns None
+
+# Updating using update()
+student.update({"age": 21, "branch": "AI & DS Engg"})
+print("Full dictionary after update:", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Current branch: AI\&DS\\Non-existent key: None\\Full dictionary after update: \{'name': 'Abhishek', 'age': 21, 'branch': 'AI \& DS Engg'\}}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{Q17. Write a Python program to delete an element from a dictionary using \texttt{pop()} and \texttt{del}.}
+
+\method{1 -- Using \texttt{pop()}}
+\logicbox{\texttt{pop(key)} removes the specified key from the dictionary and also returns its value, which is useful when the deleted value needs to be used afterwards.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+print("Original dictionary:", student)
+
+removed_value = student.pop("age")
+print("Removed value:", removed_value)
+print("Dictionary after pop('age'):", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Original dictionary: \{'name': 'Abhishek', 'age': 20, 'branch': 'AI\&DS'\}\\Removed value: 20\\Dictionary after pop('age'): \{'name': 'Abhishek', 'branch': 'AI\&DS'\}}
+
+\method{2 -- Using \texttt{del} statement}
+\logicbox{The \texttt{del} statement directly deletes a key-value pair from the dictionary using \texttt{del dict[key]}, but unlike \texttt{pop()}, it does not return the removed value.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+print("Original dictionary:", student)
+
+del student["branch"]
+print("Dictionary after del student['branch']:", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Original dictionary: \{'name': 'Abhishek', 'age': 20, 'branch': 'AI\&DS'\}\\Dictionary after del student['branch']: \{'name': 'Abhishek', 'age': 20\}}
+
+\method{3 -- Using \texttt{popitem()} (bonus method)}
+\logicbox{\texttt{popitem()} removes and returns the last inserted key-value pair as a tuple, without needing to specify a key name.}
+\begin{lstlisting}
+student = {"name": "Abhishek", "age": 20, "branch": "AI&DS"}
+print("Original dictionary:", student)
+
+last_item = student.popitem()
+print("Removed item:", last_item)
+print("Dictionary after popitem():", student)
+\end{lstlisting}
+\inout{(dictionary defined in code)}{Original dictionary: \{'name': 'Abhishek', 'age': 20, 'branch': 'AI\&DS'\}\\Removed item: ('branch', 'AI\&DS')\\Dictionary after popitem(): \{'name': 'Abhishek', 'age': 20\}}
+\end{qbox}
+
+% ----------------------------------------------------------------
+\begin{qbox}{\1}
+
+\method{1 -- Using dictionary comprehension (the required method)}
+\logicbox{Dictionary comprehension builds key-value pairs in one line using the syntax \texttt{\{key\_expr: value\_expr for item in iterable\}}. Here, each number \texttt{x} becomes a key and its square becomes the value.}
+\begin{lstlisting}
+squares_dict = {x: x*x for x in range(1, 11)}
+print("Dictionary of numbers and their squares:", squares_dict)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Dictionary of numbers and their squares: \{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100\}}
+
+\method{2 -- Using a loop (traditional method, for comparison)}
+\logicbox{Start with an empty dictionary. For every number in the given range, compute its square and add the pair to the dictionary using square-bracket assignment.}
+\begin{lstlisting}
+squares_dict = {}
+
+for x in range(1, 11):
+    squares_dict[x] = x*x
+
+print("Dictionary of numbers and their squares:", squares_dict)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Dictionary of numbers and their squares: \{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100\}}
+
+\method{3 -- Using \texttt{dict()} constructor with \texttt{zip()}}
+\logicbox{\texttt{zip()} pairs up two separate lists (numbers and their squares) element by element; \texttt{dict()} then converts these paired tuples directly into a dictionary.}
+\begin{lstlisting}
+numbers = list(range(1, 11))
+squares = [x*x for x in numbers]
+
+squares_dict = dict(zip(numbers, squares))
+print("Dictionary of numbers and their squares:", squares_dict)
+\end{lstlisting}
+\inout{(range fixed in code: 1 to 10)}{Dictionary of numbers and their squares: \{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100\}}
+\end{qbox}
