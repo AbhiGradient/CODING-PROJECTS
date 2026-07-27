@@ -13,7 +13,7 @@ It is designed to grow continuously as I explore new languages, frameworks, tool
 - Maintain a single, organized place for hands-on coding  
 - Track progress over time using Git  
 
-> ⚠️ Note: This repository is not focused on production-ready projects, but rather on learning, experimentation, and skill development.
+> ⚠️ Note: This repository is not focused on production-ready projects, but rather on learning, experimentation, and skill development.  HI !
 
 ---
 
