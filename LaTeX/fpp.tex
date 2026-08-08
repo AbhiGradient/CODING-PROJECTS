@@ -1,0 +1,452 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codeblue}{rgb}{0,0,0.6}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+
+\lstset{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codeblue}\bfseries,
+  commentstyle=\color{codegreen}\itshape,
+  stringstyle=\color{codepurple},
+  numbers=left,
+  numberstyle=\tiny,
+  frame=single,
+  breaklines=true,
+  showstringspaces=false,
+  language=Python
+}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\title{Python Programming Question Bank \\ Units 3, 4, 5, 6}
+\author{Abhishek Y. Sapkale}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Unit 3: Strings}
+% ============================================================
+
+\subsection{Q13: Reverse a string without using built-in functions}
+\begin{lstlisting}
+def reverse_string(s):
+    reversed_str = ""
+    for ch in s:
+        reversed_str = ch + reversed_str
+    return reversed_str
+
+text = input("Enter a string: ")
+print("Reversed string:", reverse_string(text))
+\end{lstlisting}
+
+\subsection{Q14: Check if a string is a palindrome}
+\begin{lstlisting}
+def is_palindrome(s):
+    return s == s[::-1]
+
+text = input("Enter a string: ")
+if is_palindrome(text):
+    print(text, "is a palindrome")
+else:
+    print(text, "is not a palindrome")
+\end{lstlisting}
+
+\subsection{Q15: Count vowels and consonants in a string}
+\begin{lstlisting}
+text = input("Enter a string: ")
+vowels = 0
+consonants = 0
+
+for ch in text.lower():
+    if ch.isalpha():
+        if ch in "aeiou":
+            vowels += 1
+        else:
+            consonants += 1
+
+print("Vowels:", vowels)
+print("Consonants:", consonants)
+\end{lstlisting}
+
+\subsection{Q16: Find length of a string without len()}
+\begin{lstlisting}
+def string_length(s):
+    count = 0
+    for ch in s:
+        count += 1
+    return count
+
+text = input("Enter a string: ")
+print("Length of string:", string_length(text))
+\end{lstlisting}
+
+\subsection{Q17: Convert lowercase to uppercase and vice versa}
+\begin{lstlisting}
+text = input("Enter a string: ")
+result = ""
+
+for ch in text:
+    if ch.isupper():
+        result += ch.lower()
+    elif ch.islower():
+        result += ch.upper()
+    else:
+        result += ch
+
+print("Converted string:", result)
+\end{lstlisting}
+
+\subsection{Q18: Remove spaces from a string}
+\begin{lstlisting}
+text = input("Enter a string: ")
+result = ""
+
+for ch in text:
+    if ch != " ":
+        result += ch
+
+print("String without spaces:", result)
+\end{lstlisting}
+
+\subsection{Q19: Count frequency of each character}
+\begin{lstlisting}
+text = input("Enter a string: ")
+freq = {}
+
+for ch in text:
+    if ch in freq:
+        freq[ch] += 1
+    else:
+        freq[ch] = 1
+
+for ch, count in freq.items():
+    print(f"'{ch}' : {count}")
+\end{lstlisting}
+
+\subsection{Q20: Count words in a sentence}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+print("Number of words:", len(words))
+\end{lstlisting}
+
+\subsection{Q21: Find largest and smallest word in a string}
+\begin{lstlisting}
+sentence = input("Enter a sentence: ")
+words = sentence.split()
+
+largest = words[0]
+smallest = words[0]
+
+for word in words:
+    if len(word) > len(largest):
+        largest = word
+    if len(word) < len(smallest):
+        smallest = word
+
+print("Largest word:", largest)
+print("Smallest word:", smallest)
+\end{lstlisting}
+
+% ============================================================
+\section{Unit 4: Lists and Tuples}
+% ============================================================
+
+\subsection{Q13: Create a list and print all its elements using a loop}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+
+for item in my_list:
+    print(item)
+\end{lstlisting}
+
+\subsection{Q14: Find the largest and smallest element in a list}
+\begin{lstlisting}
+my_list = [12, 45, 2, 67, 33, 9]
+
+largest = my_list[0]
+smallest = my_list[0]
+
+for num in my_list:
+    if num > largest:
+        largest = num
+    if num < smallest:
+        smallest = num
+
+print("Largest element:", largest)
+print("Smallest element:", smallest)
+\end{lstlisting}
+
+\subsection{Q15: Demonstrate list functions (append, insert, remove, pop)}
+\begin{lstlisting}
+my_list = [1, 2, 3, 4, 5]
+print("Original list:", my_list)
+
+my_list.append(6)
+print("After append(6):", my_list)
+
+my_list.insert(2, 100)
+print("After insert(2, 100):", my_list)
+
+my_list.remove(100)
+print("After remove(100):", my_list)
+
+my_list.pop()
+print("After pop():", my_list)
+\end{lstlisting}
+
+\subsection{Q16: Create a nested list and access specific elements}
+\begin{lstlisting}
+nested_list = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+print("Full nested list:", nested_list)
+print("Element at row 0, col 2:", nested_list[0][2])
+print("Element at row 1, col 1:", nested_list[1][1])
+print("Element at row 2, col 0:", nested_list[2][0])
+\end{lstlisting}
+
+\subsection{Q17: List comprehension to generate squares of numbers from 1 to 10}
+\begin{lstlisting}
+squares = [x**2 for x in range(1, 11)]
+print("Squares from 1 to 10:", squares)
+\end{lstlisting}
+
+\subsection{Q18: Check whether an element exists in a list using membership operators}
+\begin{lstlisting}
+my_list = [10, 20, 30, 40, 50]
+num = int(input("Enter a number to search: "))
+
+if num in my_list:
+    print(num, "is present in the list")
+else:
+    print(num, "is not present in the list")
+\end{lstlisting}
+
+\subsection{Q19: Create a tuple and demonstrate tuple packing and unpacking}
+\begin{lstlisting}
+# Tuple packing
+my_tuple = 1, 2, 3
+print("Packed tuple:", my_tuple)
+
+# Tuple unpacking
+a, b, c = my_tuple
+print("Unpacked values:", a, b, c)
+\end{lstlisting}
+
+\subsection{Q20: Compare two tuples and display whether they are equal or not}
+\begin{lstlisting}
+tuple1 = (1, 2, 3)
+tuple2 = (1, 2, 3)
+
+if tuple1 == tuple2:
+    print("Tuples are equal")
+else:
+    print("Tuples are not equal")
+\end{lstlisting}
+
+% ============================================================
+\section{Unit 5: Sets and Dictionaries}
+% ============================================================
+
+\subsection{Q11: Create a set and perform add and remove operations}
+\begin{lstlisting}
+my_set = {1, 2, 3, 4, 5}
+print("Original set:", my_set)
+
+my_set.add(6)
+print("After add(6):", my_set)
+
+my_set.remove(3)
+print("After remove(3):", my_set)
+\end{lstlisting}
+
+\subsection{Q12: Find the union and intersection of two sets}
+\begin{lstlisting}
+set1 = {1, 2, 3, 4}
+set2 = {3, 4, 5, 6}
+
+print("Union:", set1 | set2)
+print("Intersection:", set1 & set2)
+\end{lstlisting}
+
+\subsection{Q13: Check whether an element is present in a set using membership operators}
+\begin{lstlisting}
+my_set = {10, 20, 30, 40}
+num = int(input("Enter a number to search: "))
+
+if num in my_set:
+    print(num, "is present in the set")
+else:
+    print(num, "is not present in the set")
+\end{lstlisting}
+
+\subsection{Q14: Create a set using set comprehension (squares of numbers)}
+\begin{lstlisting}
+square_set = {x**2 for x in range(1, 11)}
+print("Set of squares:", square_set)
+\end{lstlisting}
+
+\subsection{Q15: Create a dictionary and display its elements}
+\begin{lstlisting}
+student = {"name": "Abhishek", "roll": "AD1156", "course": "AI & DS"}
+
+for key, value in student.items():
+    print(key, ":", value)
+\end{lstlisting}
+
+\subsection{Q16: Access and update values in a dictionary}
+\begin{lstlisting}
+student = {"name": "Abhishek", "roll": "AD1156", "course": "AI & DS"}
+
+# Accessing value
+print("Name:", student["name"])
+
+# Updating value
+student["course"] = "AI & Data Science"
+print("Updated dictionary:", student)
+\end{lstlisting}
+
+\subsection{Q17: Delete an element from a dictionary using pop() and del}
+\begin{lstlisting}
+student = {"name": "Abhishek", "roll": "AD1156", "course": "AI & DS"}
+
+# Using pop()
+student.pop("course")
+print("After pop():", student)
+
+# Using del
+del student["roll"]
+print("After del:", student)
+\end{lstlisting}
+
+\subsection{Q18: Create a dictionary using dictionary comprehension (number and its square)}
+\begin{lstlisting}
+square_dict = {x: x**2 for x in range(1, 11)}
+print("Dictionary of squares:", square_dict)
+\end{lstlisting}
+
+% ============================================================
+\section{Unit 6: Functions and Modules}
+% ============================================================
+
+\subsection{Q13: Create a function to find the factorial of a number}
+\begin{lstlisting}
+def factorial(n):
+    fact = 1
+    for i in range(1, n + 1):
+        fact *= i
+    return fact
+
+num = int(input("Enter a number: "))
+print("Factorial:", factorial(num))
+\end{lstlisting}
+
+\subsection{Q14: Check whether a number is prime or not}
+\begin{lstlisting}
+def is_prime(n):
+    if n < 2:
+        return False
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
+
+num = int(input("Enter a number: "))
+if is_prime(num):
+    print(num, "is a prime number")
+else:
+    print(num, "is not a prime number")
+\end{lstlisting}
+
+\subsection{Q15: Function that accepts a list and returns the sum of all elements}
+\begin{lstlisting}
+def sum_list(lst):
+    total = 0
+    for num in lst:
+        total += num
+    return total
+
+numbers = [10, 20, 30, 40]
+print("Sum of list:", sum_list(numbers))
+\end{lstlisting}
+
+\subsection{Q16: Lambda function to find the square of a number}
+\begin{lstlisting}
+square = lambda x: x ** 2
+
+num = int(input("Enter a number: "))
+print("Square:", square(num))
+\end{lstlisting}
+
+\subsection{Q17: Demonstrate the use of default and keyword arguments}
+\begin{lstlisting}
+def student_info(name, course="AI & Data Science"):
+    print("Name:", name)
+    print("Course:", course)
+
+# Using default argument
+student_info("Abhishek")
+
+# Using keyword argument
+student_info(name="Om", course="Computer Science")
+\end{lstlisting}
+
+\subsection{Q18: Recursive function to calculate Fibonacci series up to n terms}
+\begin{lstlisting}
+def fibonacci(n):
+    if n <= 1:
+        return n
+    else:
+        return fibonacci(n - 1) + fibonacci(n - 2)
+
+terms = int(input("Enter number of terms: "))
+for i in range(terms):
+    print(fibonacci(i), end=" ")
+\end{lstlisting}
+
+\subsection{Q19: Create a module with addition and subtraction functions, then use it}
+\begin{lstlisting}
+# Save this part as mymodule.py
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+\end{lstlisting}
+
+\begin{lstlisting}
+# Save this part as main.py (in the same folder as mymodule.py)
+import mymodule
+
+x = 10
+y = 5
+
+print("Addition:", mymodule.add(x, y))
+print("Subtraction:", mymodule.subtract(x, y))
+\end{lstlisting}
+
+\subsection{Q20: Import math module to calculate square root, power, and factorial}
+\begin{lstlisting}
+import math
+
+num = int(input("Enter a number: "))
+
+print("Square root:", math.sqrt(num))
+print("Power (num^2):", math.pow(num, 2))
+print("Factorial:", math.factorial(num))
+\end{lstlisting}
+
+\end{document}

@@ -1,0 +1,270 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+\definecolor{outputbg}{rgb}{0.92,0.96,0.92}
+\definecolor{outputborder}{rgb}{0.3,0.6,0.3}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  showstringspaces=false
+}
+
+\newtcolorbox{outputbox}{
+  enhanced,
+  breakable,
+  colback=outputbg,
+  colframe=outputborder,
+  boxrule=0.5pt,
+  arc=2pt,
+  left=6pt,right=6pt,top=4pt,bottom=4pt,
+  fonttitle=\bfseries,
+  title=Sample Output
+}
+
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\title{Sample Inputs and Outputs \\ Python Programming Question Bank \\ Units 3, 4, 5, 6}
+\author{Abhishek Y. Sapkale}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Unit 3: Strings}
+% ============================================================
+
+\subsection{Q13: Reverse a string without using built-in functions}
+\begin{outputbox}
+Enter a string: hello\\
+Reversed string: olleh
+\end{outputbox}
+
+\subsection{Q14: Check if a string is a palindrome}
+\begin{outputbox}
+Enter a string: madam\\
+madam is a palindrome
+\end{outputbox}
+
+\subsection{Q15: Count vowels and consonants in a string}
+\begin{outputbox}
+Enter a string: Abhishek\\
+Vowels: 3\\
+Consonants: 5
+\end{outputbox}
+
+\subsection{Q16: Find length of a string without len()}
+\begin{outputbox}
+Enter a string: python\\
+Length of string: 6
+\end{outputbox}
+
+\subsection{Q17: Convert lowercase to uppercase and vice versa}
+\begin{outputbox}
+Enter a string: Hello World\\
+Converted string: hELLO wORLD
+\end{outputbox}
+
+\subsection{Q18: Remove spaces from a string}
+\begin{outputbox}
+Enter a string: I am a student\\
+String without spaces: Iamastudent
+\end{outputbox}
+
+\subsection{Q19: Count frequency of each character}
+\begin{outputbox}
+Enter a string: aabbc\\
+'a' : 2\\
+'b' : 2\\
+'c' : 1
+\end{outputbox}
+
+\subsection{Q20: Count words in a sentence}
+\begin{outputbox}
+Enter a sentence: I love python programming\\
+Number of words: 4
+\end{outputbox}
+
+\subsection{Q21: Find largest and smallest word in a string}
+\begin{outputbox}
+Enter a sentence: I am learning python programming\\
+Largest word: programming\\
+Smallest word: I
+\end{outputbox}
+
+% ============================================================
+\section{Unit 4: Lists and Tuples}
+% ============================================================
+
+\subsection{Q13: Create a list and print all its elements using a loop}
+\begin{outputbox}
+10\\
+20\\
+30\\
+40\\
+50
+\end{outputbox}
+
+\subsection{Q14: Find the largest and smallest element in a list}
+\begin{outputbox}
+Largest element: 67\\
+Smallest element: 2
+\end{outputbox}
+
+\subsection{Q15: Demonstrate list functions (append, insert, remove, pop)}
+\begin{outputbox}
+Original list: [1, 2, 3, 4, 5]\\
+After append(6): [1, 2, 3, 4, 5, 6]\\
+After insert(2, 100): [1, 2, 100, 3, 4, 5, 6]\\
+After remove(100): [1, 2, 3, 4, 5, 6]\\
+After pop(): [1, 2, 3, 4, 5]
+\end{outputbox}
+
+\subsection{Q16: Create a nested list and access specific elements}
+\begin{outputbox}
+Full nested list: [[1, 2, 3], [4, 5, 6], [7, 8, 9]]\\
+Element at row 0, col 2: 3\\
+Element at row 1, col 1: 5\\
+Element at row 2, col 0: 7
+\end{outputbox}
+
+\subsection{Q17: List comprehension to generate squares of numbers from 1 to 10}
+\begin{outputbox}
+Squares from 1 to 10: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
+\end{outputbox}
+
+\subsection{Q18: Check whether an element exists in a list using membership operators}
+\begin{outputbox}
+Enter a number to search: 30\\
+30 is present in the list
+\end{outputbox}
+
+\subsection{Q19: Create a tuple and demonstrate tuple packing and unpacking}
+\begin{outputbox}
+Packed tuple: (1, 2, 3)\\
+Unpacked values: 1 2 3
+\end{outputbox}
+
+\subsection{Q20: Compare two tuples and display whether they are equal or not}
+\begin{outputbox}
+Tuples are equal
+\end{outputbox}
+
+% ============================================================
+\section{Unit 5: Sets and Dictionaries}
+% ============================================================
+
+\subsection{Q11: Create a set and perform add and remove operations}
+\begin{outputbox}
+Original set: \{1, 2, 3, 4, 5\}\\
+After add(6): \{1, 2, 3, 4, 5, 6\}\\
+After remove(3): \{1, 2, 4, 5, 6\}
+\end{outputbox}
+
+\subsection{Q12: Find the union and intersection of two sets}
+\begin{outputbox}
+Union: \{1, 2, 3, 4, 5, 6\}\\
+Intersection: \{3, 4\}
+\end{outputbox}
+
+\subsection{Q13: Check whether an element is present in a set using membership operators}
+\begin{outputbox}
+Enter a number to search: 25\\
+25 is not present in the set
+\end{outputbox}
+
+\subsection{Q14: Create a set using set comprehension (squares of numbers)}
+\begin{outputbox}
+Set of squares: \{1, 4, 36, 70, 9, 16, 49, 81, 100, 25, 64\}
+\end{outputbox}
+\textit{Note: Set elements may not display in sorted order since sets are unordered in Python.}
+
+\subsection{Q15: Create a dictionary and display its elements}
+\begin{outputbox}
+name : Abhishek\\
+roll : AD1156\\
+course : AI \& DS
+\end{outputbox}
+
+\subsection{Q16: Access and update values in a dictionary}
+\begin{outputbox}
+Name: Abhishek\\
+Updated dictionary: \{'name': 'Abhishek', 'roll': 'AD1156', 'course': 'AI \& Data Science'\}
+\end{outputbox}
+
+\subsection{Q17: Delete an element from a dictionary using pop() and del}
+\begin{outputbox}
+After pop(): \{'name': 'Abhishek', 'roll': 'AD1156'\}\\
+After del: \{'name': 'Abhishek'\}
+\end{outputbox}
+
+\subsection{Q18: Create a dictionary using dictionary comprehension (number and its square)}
+\begin{outputbox}
+Dictionary of squares: \{1: 1, 2: 4, 3: 9, 4: 16, 5: 25, 6: 36, 7: 49, 8: 64, 9: 81, 10: 100\}
+\end{outputbox}
+
+% ============================================================
+\section{Unit 6: Functions and Modules}
+% ============================================================
+
+\subsection{Q13: Create a function to find the factorial of a number}
+\begin{outputbox}
+Enter a number: 5\\
+Factorial: 120
+\end{outputbox}
+
+\subsection{Q14: Check whether a number is prime or not}
+\begin{outputbox}
+Enter a number: 7\\
+7 is a prime number
+\end{outputbox}
+
+\subsection{Q15: Function that accepts a list and returns the sum of all elements}
+\begin{outputbox}
+Sum of list: 100
+\end{outputbox}
+
+\subsection{Q16: Lambda function to find the square of a number}
+\begin{outputbox}
+Enter a number: 9\\
+Square: 81
+\end{outputbox}
+
+\subsection{Q17: Demonstrate the use of default and keyword arguments}
+\begin{outputbox}
+Name: Abhishek\\
+Course: AI \& Data Science\\
+Name: Om\\
+Course: Computer Science
+\end{outputbox}
+
+\subsection{Q18: Recursive function to calculate Fibonacci series up to n terms}
+\begin{outputbox}
+Enter number of terms: 8\\
+0 1 1 2 3 5 8 13
+\end{outputbox}
+
+\subsection{Q19: Create a module with addition and subtraction functions, then use it}
+\begin{outputbox}
+Addition: 15\\
+Subtraction: 5
+\end{outputbox}
+
+\subsection{Q20: Import math module to calculate square root, power, and factorial}
+\begin{outputbox}
+Enter a number: 4\\
+Square root: 2.0\\
+Power (num\textasciicircum2): 16.0\\
+Factorial: 24
+\end{outputbox}
+
+\end{document}

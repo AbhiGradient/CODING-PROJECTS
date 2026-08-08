@@ -223,3 +223,37 @@ print(a&b)
 print(a.union(b))
 print(a^b)
 
+square = {x**2 for x in range(1,6) }
+print(square)
+
+random = [4,5,6,7,8,9]
+even = {x for x in random if x%2 == 0}
+print(even)
+
+s = "programming"
+set = set(s)
+print(set)
+
+vowels = {ch for ch in s if ch in "aeiou"}
+print(vowels)
+
+#dict
+
+student = {"name" : "abhishek",
+           "age" : 20,
+           "city" : "pune"
+           
+           }
+
+print(student)
+print(type(student))
+
+empty = dict()
+print(empty)
+empty1 = {}
+print(empty1)
+
+d = dict(name = "raj", age = 20)
+print(d)
+
+pairs  = [("a", 1 ), ]
