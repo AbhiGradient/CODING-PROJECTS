@@ -1,12 +1,21 @@
 #include <iostream>
 using namespace std;
-int main() {
-    
-    int numbers[5] = {10, 20, 30, 40, 50};
-    
-    cout << "Array Elements: ";
-    for (int i = 0; i < 5; i++) {
-        cout << numbers[i] << "\t";
+
+int main()
+{
+    int n, digit, sum = 0;
+
+    cout << "Enter a positive integer: ";
+    cin >> n;
+
+    while (n > 0)
+    {
+        digit = n % 10;
+        sum = sum + digit;
+        n = n / 10;
     }
+
+    cout << "Sum of individual digits = " << sum;
+
     return 0;
 }

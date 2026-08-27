@@ -1,7 +1,7 @@
 try:
     num = int(input("Enter a number: "))
 
-    file = open("exp11.txt", "r")
+    file = open("exp_11.txt", "r")
     print(file.read())
 
     file.close()
