@@ -38,16 +38,27 @@ int main(){
 //     case 1: cout << "Monday"; break;
 //     case 2: cout << "tuesday"; break;
 //     case 3: cout << "wednesday"; break;
-//     case 4: cout << "thursday"; break;
+//     case 4: cout << "thursday"; break; 
 //     case 5: cout << "friday"; break;
 //     case 6: cout << "saturday"; break;
 //     case 7: cout << "sunday"; break;
 //     default: cout << "Invalid";
 // } 
 
-int i = 1;
-do {cout << i;
-i++;
-}while(i<=5);
+// int i = 1;
+// do {cout << i;
+// i++;
+// }while(i<=5); 
+
+int a=10;
+int * p = &a;
+
+cout << a<< endl;
+cout << &a<< endl;
+
+cout << p << endl;
+cout << *p << endl;
       return 0;
-}
+
+
+}        
