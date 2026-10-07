@@ -1,0 +1,379 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2cm]{geometry}
+\usepackage{amsmath,amssymb,booktabs,array,enumitem}
+\setlist[enumerate]{label=(\roman*),leftmargin=*,itemsep=3pt}
+\renewcommand{\arraystretch}{1.25}
+\newcommand{\viva}[1]{\par\medskip\noindent\fbox{\parbox{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}{\textbf{Viva Tip:} #1}}\par\bigskip}
+\title{Statistics for AI\\Unit-I: Bivariate Random Variables and Joint Probability Distributions\\Solutions to the Question Bank}
+\date{}
+\begin{document}
+\maketitle
+
+\section*{Q.1}
+$X$ = number of heads, $Y$ = number of tails in three tosses, so $Y=3-X$ and $S$ has $8$ equally likely outcomes.
+
+\begin{enumerate}
+\item The only possible pairs are $(0,3),(1,2),(2,1),(3,0)$ with $P(X=x)=\binom{3}{x}/8$.
+\[
+\begin{array}{c|cccc|c}
+Y\backslash X & 0 & 1 & 2 & 3 & P_Y(y)\\ \hline
+0 & 0 & 0 & 0 & \tfrac18 & \tfrac18\\
+1 & 0 & 0 & \tfrac38 & 0 & \tfrac38\\
+2 & 0 & \tfrac38 & 0 & 0 & \tfrac38\\
+3 & \tfrac18 & 0 & 0 & 0 & \tfrac18\\ \hline
+P_X(x) & \tfrac18 & \tfrac38 & \tfrac38 & \tfrac18 & 1
+\end{array}
+\]
+\item Row and column totals give
+$P_X(x)=\tfrac18,\tfrac38,\tfrac38,\tfrac18$ for $x=0,1,2,3$ and $P_Y(y)=\tfrac18,\tfrac38,\tfrac38,\tfrac18$ for $y=0,1,2,3$.
+\item $P(Y=1)=\tfrac38$ and only $X=2$ is possible, so
+$P(X=2\mid Y=1)=\dfrac{3/8}{3/8}=1$ and $P(X=x\mid Y=1)=0$ otherwise.
+\item $p(0,0)=0$ but $P_X(0)P_Y(0)=\tfrac1{64}\neq 0$. Hence $X$ and $Y$ are \textbf{not independent}.
+\item $F(2,2)=P(X\le2,Y\le2)=p(1,2)+p(2,1)=\tfrac38+\tfrac38=\tfrac34$.
+\item $XY=2$ for $(1,2)$ and $(2,1)$: $P=\tfrac38+\tfrac38=\tfrac34$.
+\item $XY^2$ takes values $0,4,2,0$ at $(0,3),(1,2),(2,1),(3,0)$. Only $(2,1)$ gives $2$: $P=\tfrac38$.
+\item $XY$ takes values $0,2,2,0$; the value $3$ never occurs: $P(XY=3)=0$.
+\item $X+2Y=6,5,4,3$ at the four points. Values $\ge4$ come from $(0,3),(1,2),(2,1)$: $P=\tfrac18+\tfrac38+\tfrac38=\tfrac78$.
+\item $X^2+Y=3,3,5,9$ at the four points. Values $\le5$ come from the first three: $P=\tfrac18+\tfrac38+\tfrac38=\tfrac78$.
+\end{enumerate}
+\viva{When $Y$ is a function of $X$ (here $Y=3-X$), the variables are dependent; one zero cell with non-zero marginals is enough to prove it.}
+
+\section*{Q.2}
+$X=$ sum, $Y=|d_1-d_2|$, with $36$ equally likely outcomes. For $y=0$ each valid $x$ has $1$ outcome; for $y>0$ each valid $x$ has $2$ outcomes.
+
+\begin{enumerate}
+\item Table of $36\,p(x,y)$ (every entry is to be divided by $36$):
+\[
+\setlength{\arraycolsep}{4pt}
+\begin{array}{c|ccccccccccc|c}
+Y\backslash X & 2&3&4&5&6&7&8&9&10&11&12 & 36P_Y\\ \hline
+0 & 1&0&1&0&1&0&1&0&1&0&1 & 6\\
+1 & 0&2&0&2&0&2&0&2&0&2&0 & 10\\
+2 & 0&0&2&0&2&0&2&0&2&0&0 & 8\\
+3 & 0&0&0&2&0&2&0&2&0&0&0 & 6\\
+4 & 0&0&0&0&2&0&2&0&0&0&0 & 4\\
+5 & 0&0&0&0&0&2&0&0&0&0&0 & 2\\ \hline
+36P_X & 1&2&3&4&5&6&5&4&3&2&1 & 36
+\end{array}
+\]
+\item $P_X(x)=\dfrac{6-|x-7|}{36}$ for $x=2,\dots,12$ and
+$P_Y(y)=\dfrac{6}{36},\dfrac{10}{36},\dfrac{8}{36},\dfrac{6}{36},\dfrac{4}{36},\dfrac{2}{36}$ for $y=0,\dots,5$.
+\item $P(X=8)=\tfrac5{36}$. Then $P(Y=y\mid X=8)=\dfrac{p(8,y)}{5/36}$:
+\[
+P(Y=0\mid X=8)=\tfrac15,\quad P(Y=2\mid X=8)=\tfrac25,\quad P(Y=4\mid X=8)=\tfrac25 .
+\]
+\item $p(2,1)=0$ while $P_X(2)P_Y(1)=\tfrac1{36}\cdot\tfrac{10}{36}\neq0$. \textbf{Not independent.}
+\item $F(8,2)=P(X\le8,Y\le2)$: $y=0$: $x=2,4,6,8$ gives $4$; $y=1$: $x=3,5,7$ gives $6$; $y=2$: $x=4,6,8$ gives $6$. Total $16$, so $F(8,2)=\tfrac{16}{36}=\tfrac49$.
+\item $XY=12$: only $(6,2)$ is feasible ($(4,3)$, $(3,4)$, $(12,1)$ have $p=0$). $P=\tfrac2{36}=\tfrac1{18}$.
+\item $X+Y^2\le10$: $y=0$: $x\le10$ gives $5$; $y=1$: $x\le9$ gives $8$; $y=2$: $x\le6$ gives $4$; $y\ge3$ gives none. $P=\tfrac{17}{36}$.
+\item $X^2+Y^2\le50$: $y=0$ ($x\le7$): $3$; $y=1$ ($x\le7$): $6$; $y=2$ ($x\le6$): $4$; $y=3$ ($x\le6$): $2$; $y=4,5$: none. $P=\tfrac{15}{36}=\tfrac5{12}$.
+\item $2X+Y\ge14$: $y=0$: $3$; $y=1$: $6$; $y=2$: $6$; $y=3$: $4$; $y=4$: $4$; $y=5$: $2$. Total $25$, $P=\tfrac{25}{36}$.
+\item $X^2-Y^2=48$: $(7,1)$ and $(8,4)$ satisfy it ($49-1=48$, $64-16=48$). $P=\tfrac2{36}+\tfrac2{36}=\tfrac19$.
+\end{enumerate}
+\viva{$p(x,y)$ is non-zero only when $x$ and $y$ have the same parity, which immediately shows dependence.}
+
+\section*{Q.3}
+\begin{enumerate}
+\item $p(x,y)$ is read directly from the table; $\sum p(x,y)=1$.
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 0 & 1 & 2 & P_Y(y)\\ \hline
+0 & 0.05 & 0.10 & 0.05 & 0.20\\
+1 & 0.10 & 0.20 & 0.10 & 0.40\\
+2 & 0.05 & 0.15 & 0.20 & 0.40\\ \hline
+P_X(x) & 0.20 & 0.45 & 0.35 & 1
+\end{array}
+\]
+\item $P_X(x)=0.20,\,0.45,\,0.35$ for $x=0,1,2$; $P_Y(y)=0.20,\,0.40,\,0.40$ for $y=0,1,2$.
+\item $P(X=x\mid Y=1)=\dfrac{p(x,1)}{0.40}$: $\;0.25,\;0.50,\;0.25$ for $x=0,1,2$.
+\item $p(0,0)=0.05$ but $P_X(0)P_Y(0)=0.20\times0.20=0.04$. \textbf{Not independent.}
+\item $F(1,1)=0.05+0.10+0.10+0.20=0.45$.
+\item $X+Y^2\le2$: $y=0$: all $x$ ($0.20$); $y=1$: $x\le1$ ($0.30$); $y=2$: none. $P=0.50$.
+\item $X^2+Y^2=4$: $(0,2)$ and $(2,0)$. $P=0.05+0.05=0.10$.
+\item $XY^2=2$: only $(2,1)$. $P=0.10$.
+\item $XY=4$: only $(2,2)$. $P=0.20$.
+\item $X+2Y\ge3$: $(1,1),(2,1),(0,2),(1,2),(2,2)$. $P=0.20+0.10+0.05+0.15+0.20=0.70$.
+\end{enumerate}
+\viva{To prove independence every cell must satisfy $p(x,y)=P_X(x)P_Y(y)$; to disprove it, one failing cell suffices.}
+
+\section*{Q.4}
+$p(x,y)=k(x+y)$, $x=1,2,3$, $y=1,2$.
+
+\begin{enumerate}
+\item $\sum p=k\big[(2+3+4)+(3+4+5)\big]=21k=1\Rightarrow k=\dfrac1{21}$, hence $p(x,y)=\dfrac{x+y}{21}$.
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 1 & 2 & 3 & P_Y(y)\\ \hline
+1 & \tfrac2{21} & \tfrac3{21} & \tfrac4{21} & \tfrac9{21}\\
+2 & \tfrac3{21} & \tfrac4{21} & \tfrac5{21} & \tfrac{12}{21}\\ \hline
+P_X(x) & \tfrac5{21} & \tfrac7{21} & \tfrac9{21} & 1
+\end{array}
+\]
+\item $P_X(x)=\dfrac{2x+3}{21}$ for $x=1,2,3$; $\;P_Y(y)=\dfrac{6+3y}{21}$ for $y=1,2$.
+\item $P(X=x\mid Y=2)=\dfrac{p(x,2)}{12/21}=\dfrac{x+2}{12}$: $\;\tfrac14,\;\tfrac13,\;\tfrac5{12}$.
+\item $p(1,1)=\tfrac{42}{441}$ whereas $P_X(1)P_Y(1)=\tfrac5{21}\cdot\tfrac9{21}=\tfrac{45}{441}$. \textbf{Not independent.}
+\item $F(2,1)=p(1,1)+p(2,1)=\tfrac2{21}+\tfrac3{21}=\tfrac5{21}$.
+\item $XY=4$: only $(2,2)$. $P=\tfrac4{21}$.
+\item $XY^2=4$: $y=2,\,x=1$, i.e.\ $(1,2)$. $P=\tfrac3{21}=\tfrac17$.
+\item $X^2+Y^2\le10$: all points except $(3,2)$ (value $13$). $P=1-\tfrac5{21}=\tfrac{16}{21}$.
+\item $X+2Y>4$: $y=1$: $x=3$ ($\tfrac4{21}$); $y=2$: all $x$ ($\tfrac{12}{21}$). $P=\tfrac{16}{21}$.
+\item $2XY\ge6\iff XY\ge3$: $(3,1),(2,2),(3,2)$. $P=\tfrac4{21}+\tfrac4{21}+\tfrac5{21}=\tfrac{13}{21}$.
+\end{enumerate}
+\viva{Always find the constant $k$ from the condition $\sum\sum p(x,y)=1$ before doing anything else.}
+
+\section*{Q.5}
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|cc|c}
+Y\backslash X & 1 & 2 & P_Y(y)\\ \hline
+0 & 0.10 & 0.15 & 0.25\\
+1 & 0.20 & 0.25 & 0.45\\
+2 & 0.10 & 0.20 & 0.30\\ \hline
+P_X(x) & 0.40 & 0.60 & 1
+\end{array}
+\]
+\item $P_X(1)=0.40,\;P_X(2)=0.60$; $\;P_Y(0)=0.25,\;P_Y(1)=0.45,\;P_Y(2)=0.30$.
+\item $P(Y=y\mid X=2)=\dfrac{p(2,y)}{0.60}$: $\;P(Y=0)=\tfrac14,\;P(Y=1)=\tfrac5{12},\;P(Y=2)=\tfrac13$.
+\item $p(1,1)=0.20$ but $P_X(1)P_Y(1)=0.40\times0.45=0.18$. \textbf{Not independent.}
+\item $F(1,1)=0.10+0.20=0.30$.
+\item $X+Y^2\le3$: $(1,0),(2,0),(1,1),(2,1)$. $P=0.10+0.15+0.20+0.25=0.70$.
+\item $X^2+Y^2=5$: $(1,2),(2,1)$. $P=0.10+0.25=0.35$.
+\item $XY^2=4$: $(1,2)$. $P=0.10$.
+\item $2XY=4\iff XY=2$: $(1,2),(2,1)$. $P=0.10+0.25=0.35$.
+\item $X^2+Y\le5$: all points except $(2,2)$ (value $6$). $P=1-0.20=0.80$.
+\end{enumerate}
+\viva{Conditional probability always uses the \emph{marginal of the given variable} in the denominator.}
+
+\section*{Q.6}
+Drawing without replacement from $\{1,2,3\}$: the $6$ ordered pairs $(x,y)$ with $x\neq y$ are equally likely, so $p(x,y)=\tfrac16$ for $x\neq y$ and $0$ for $x=y$.
+
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 1 & 2 & 3 & P_Y(y)\\ \hline
+1 & 0 & \tfrac16 & \tfrac16 & \tfrac13\\
+2 & \tfrac16 & 0 & \tfrac16 & \tfrac13\\
+3 & \tfrac16 & \tfrac16 & 0 & \tfrac13\\ \hline
+P_X(x) & \tfrac13 & \tfrac13 & \tfrac13 & 1
+\end{array}
+\]
+\item $P_X(x)=\tfrac13$ for $x=1,2,3$ and $P_Y(y)=\tfrac13$ for $y=1,2,3$.
+\item $P(Y=y\mid X=2)=\dfrac{p(2,y)}{1/3}$: $\;P(Y=1)=\tfrac12,\;P(Y=2)=0,\;P(Y=3)=\tfrac12$.
+\item $p(1,1)=0\neq\tfrac19=P_X(1)P_Y(1)$. \textbf{Not independent.}
+\item $F(2,2)=p(1,2)+p(2,1)=\tfrac16+\tfrac16=\tfrac13$.
+\item $XY=2$: $(1,2),(2,1)$. $P=\tfrac26=\tfrac13$.
+\item $XY^2=3$: $(3,1)$ only. $P=\tfrac16$.
+\item $2XY=12\iff XY=6$: $(2,3),(3,2)$. $P=\tfrac13$.
+\item $X^2+Y^2\le10$: $(1,2),(2,1),(1,3),(3,1)$; the pairs $(2,3),(3,2)$ give $13$. $P=\tfrac46=\tfrac23$.
+\item $X+2Y\ge5$: $(1,2),(1,3),(2,3),(3,1),(3,2)$; only $(2,1)$ gives $4$. $P=\tfrac56$.
+\end{enumerate}
+\viva{Sampling without replacement always produces dependent variables, since the second draw depends on the first.}
+
+\section*{Q.7}
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 0 & 1 & 2 & P_Y(y)\\ \hline
+1 & 0.05 & 0.10 & 0.15 & 0.30\\
+2 & 0.10 & 0.20 & 0.10 & 0.40\\
+3 & 0.05 & 0.10 & 0.15 & 0.30\\ \hline
+P_X(x) & 0.20 & 0.40 & 0.40 & 1
+\end{array}
+\]
+\item $P_X(x)=0.20,\,0.40,\,0.40$ for $x=0,1,2$; $\;P_Y(y)=0.30,\,0.40,\,0.30$ for $y=1,2,3$.
+\item $P(X=x\mid Y=2)=\dfrac{p(x,2)}{0.40}$: $\;0.25,\;0.50,\;0.25$.
+\item $p(0,1)=0.05$ but $P_X(0)P_Y(1)=0.20\times0.30=0.06$. \textbf{Not independent.}
+\item $F(1,2)=0.05+0.10+0.10+0.20=0.45$.
+\item $XY=2$: $(1,2),(2,1)$. $P=0.20+0.15=0.35$.
+\item $XY^2=4$: $(1,2)$. $P=0.20$.
+\item $X^2+Y^2\le5$: $(0,1),(1,1),(2,1),(0,2),(1,2)$. $P=0.05+0.10+0.15+0.10+0.20=0.60$.
+\item $X+2Y\ge5$: $y=2$: $x=1,2$ ($0.30$); $y=3$: all $x$ ($0.30$). $P=0.60$.
+\item $X^2+Y\le5$: all points except $(2,2)$ (value $6$) and $(2,3)$ (value $7$). $P=1-0.10-0.15=0.75$.
+\end{enumerate}
+\viva{A symmetric-looking table does not imply independence; always test the cells numerically.}
+
+\section*{Q.8}
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|cc|c}
+Y\backslash X & 1 & 2 & P_Y(y)\\ \hline
+1 & 0.10 & 0.20 & 0.30\\
+2 & 0.30 & 0.40 & 0.70\\ \hline
+P_X(x) & 0.40 & 0.60 & 1
+\end{array}
+\]
+\item $P_X(1)=0.40,\;P_X(2)=0.60$; $\;P_Y(1)=0.30,\;P_Y(2)=0.70$.
+\item $P(Y=y\mid X=2)=\dfrac{p(2,y)}{0.60}$: $\;P(Y=1)=\tfrac13,\;P(Y=2)=\tfrac23$.
+\item $p(1,1)=0.10$ but $P_X(1)P_Y(1)=0.40\times0.30=0.12$. \textbf{Not independent.}
+\item $F(1,2)=P(X\le1,Y\le2)=0.10+0.30=0.40$.
+\item $XY=2$: $(1,2),(2,1)$. $P=0.30+0.20=0.50$.
+\item $XY^2=4$: $(1,2)$. $P=0.30$.
+\item $2XY=8\iff XY=4$: $(2,2)$. $P=0.40$.
+\item $X^2+Y^2\le5$: $(1,1),(2,1),(1,2)$. $P=0.10+0.20+0.30=0.60$.
+\item $X+2Y\ge5$: $(1,2),(2,2)$. $P=0.30+0.40=0.70$.
+\end{enumerate}
+\viva{For a $2\times2$ table, independence holds if and only if $p(1,1)p(2,2)=p(1,2)p(2,1)$; here $0.04\neq0.09$.}
+
+\section*{Q.9}
+$p(x,y)=kxy$, $x=1,2,3$, $y=1,2$.
+
+\begin{enumerate}
+\item $\sum p=k\Big(\sum_{x=1}^{3}x\Big)\Big(\sum_{y=1}^{2}y\Big)=k(6)(3)=18k=1\Rightarrow k=\dfrac1{18}$, so $p(x,y)=\dfrac{xy}{18}$.
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 1 & 2 & 3 & P_Y(y)\\ \hline
+1 & \tfrac1{18} & \tfrac2{18} & \tfrac3{18} & \tfrac13\\
+2 & \tfrac2{18} & \tfrac4{18} & \tfrac6{18} & \tfrac23\\ \hline
+P_X(x) & \tfrac16 & \tfrac13 & \tfrac12 & 1
+\end{array}
+\]
+\item $P_X(x)=\dfrac{x}{6}$ for $x=1,2,3$; $\;P_Y(y)=\dfrac{y}{3}$ for $y=1,2$.
+\item $P(Y=y\mid X=2)=\dfrac{2y/18}{6/18}=\dfrac{y}{3}$: $\;P(Y=1)=\tfrac13,\;P(Y=2)=\tfrac23$.
+\item $P_X(x)P_Y(y)=\dfrac x6\cdot\dfrac y3=\dfrac{xy}{18}=p(x,y)$ for all $(x,y)$. Hence $X$ and $Y$ are \textbf{independent}.
+\item $F(2,1)=\tfrac1{18}+\tfrac2{18}=\tfrac3{18}=\tfrac16$.
+\item $XY=4$: $(2,2)$. $P=\tfrac4{18}=\tfrac29$.
+\item $XY^2=8$: $y=2,\,x=2$, i.e.\ $(2,2)$. $P=\tfrac29$.
+\item $2XY=6\iff XY=3$: $(3,1)$. $P=\tfrac3{18}=\tfrac16$.
+\item $X^2+Y^2\le10$: all except $(3,2)$ (value $13$). $P=1-\tfrac6{18}=\tfrac23$.
+\item $X+2Y\ge5$: $(3,1)$ and all points with $y=2$. $P=\tfrac3{18}+\tfrac{12}{18}=\tfrac56$.
+\end{enumerate}
+\viva{If $p(x,y)=g(x)h(y)$ on a rectangular support, then $X$ and $Y$ are independent (factorisation theorem).}
+
+\section*{Q.10}
+$p(x,y)=k(x+2y)$, $x=0,1,2$, $y=1,2,3$.
+
+\begin{enumerate}
+\item $\sum p=k\big[(2+3+4)+(4+5+6)+(6+7+8)\big]=45k=1\Rightarrow k=\dfrac1{45}$.
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 0 & 1 & 2 & P_Y(y)\\ \hline
+1 & \tfrac2{45} & \tfrac3{45} & \tfrac4{45} & \tfrac9{45}\\
+2 & \tfrac4{45} & \tfrac5{45} & \tfrac6{45} & \tfrac{15}{45}\\
+3 & \tfrac6{45} & \tfrac7{45} & \tfrac8{45} & \tfrac{21}{45}\\ \hline
+P_X(x) & \tfrac{12}{45} & \tfrac{15}{45} & \tfrac{18}{45} & 1
+\end{array}
+\]
+\item $P_X(x)=\dfrac{3x+12}{45}$ for $x=0,1,2$; $\;P_Y(y)=\dfrac{6y+3}{45}$ for $y=1,2,3$.
+\item $P(X=x\mid Y=2)=\dfrac{p(x,2)}{15/45}=\dfrac{x+4}{15}$: $\;\tfrac4{15},\;\tfrac5{15},\;\tfrac6{15}$.
+\item Although this conditional law coincides with $P_X$, the condition must hold for every $y$. Take $p(0,1)=\tfrac{2}{45}=\tfrac{90}{2025}$, while $P_X(0)P_Y(1)=\tfrac{12}{45}\cdot\tfrac9{45}=\tfrac{108}{2025}$. \textbf{Not independent.}
+\item $F(1,2)=\tfrac{2+3+4+5}{45}=\tfrac{14}{45}$.
+\item $XY=2$: $(1,2),(2,1)$. $P=\tfrac5{45}+\tfrac4{45}=\tfrac9{45}=\tfrac15$.
+\item $XY^2=4$: $(1,2)$. $P=\tfrac5{45}=\tfrac19$.
+\item $2XY=8\iff XY=4$: $(2,2)$. $P=\tfrac6{45}=\tfrac2{15}$.
+\item $X^2+Y^2\le5$: $(0,1),(1,1),(2,1),(0,2),(1,2)$. $P=\tfrac{2+3+4+4+5}{45}=\tfrac{18}{45}=\tfrac25$.
+\item $X+2Y>4$: $y=2$: $x=1,2$ ($\tfrac{11}{45}$); $y=3$: all $x$ ($\tfrac{21}{45}$). $P=\tfrac{32}{45}$.
+\end{enumerate}
+\viva{Matching one conditional distribution with the marginal is not enough to claim independence.}
+
+\section*{Q.11}
+Independence gives $p(x,y)=P_X(x)\,P_Y(y)$.
+
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 0 & 1 & 2 & P_Y(y)\\ \hline
+1 & 0.08 & 0.200 & 0.120 & 0.40\\
+2 & 0.07 & 0.175 & 0.105 & 0.35\\
+3 & 0.05 & 0.125 & 0.075 & 0.25\\ \hline
+P_X(x) & 0.20 & 0.50 & 0.30 & 1
+\end{array}
+\]
+\item Column sums: $0.08+0.07+0.05=0.20$, $0.200+0.175+0.125=0.50$, $0.120+0.105+0.075=0.30$. Row sums: $0.40,\,0.35,\,0.25$. These reproduce the given marginals.
+\item $P(X=x\mid Y=2)=\dfrac{p(x,2)}{0.35}=0.20,\;0.50,\;0.30$, identical to $P_X(x)$.
+\item Every cell equals the product of its marginals by construction, e.g.\ $p(2,3)=0.30\times0.25=0.075$; the conditional law of $X$ does not depend on $y$. Hence independent.
+\item $F(1,2)=0.08+0.200+0.07+0.175=0.525$.
+\item $XY=2$: $(1,2),(2,1)$. $P=0.175+0.120=0.295$.
+\item $XY^2=4$: $(1,2)$. $P=0.175$.
+\item $2XY=12\iff XY=6$: $(2,3)$. $P=0.075$.
+\item $X^2+Y\le4$: $y=1$: $x=0,1$ ($0.28$); $y=2$: $x=0,1$ ($0.245$); $y=3$: $x=0,1$ ($0.175$). $P=0.70$.
+\item $X+2Y\ge5$: $y=2$: $x=1,2$ ($0.28$); $y=3$: all $x$ ($0.25$). $P=0.53$.
+\end{enumerate}
+\viva{Under independence, $P(X=x,Y=y)=P_X(x)P_Y(y)$, and $P(X\mid Y)=P(X)$.}
+
+\section*{Q.12}
+\begin{enumerate}
+\item By independence, $P_X(0)=0.40$, $P_X(1)=0.60$, $P_Y(1)=0.30$, $P_Y(2)=0.70$.
+\[
+p(0,2)=0.40-0.12=0.28,\qquad p(1,1)=0.30-0.12=0.18 .
+\]
+\[
+\begin{array}{c|cc|c}
+X\backslash Y & 1 & 2 & \text{Total}\\ \hline
+0 & 0.12 & 0.28 & 0.40\\
+1 & 0.18 & 0.42 & 0.60\\ \hline
+\text{Total} & 0.30 & 0.70 & 1
+\end{array}
+\]
+\item $P_X(0)=0.40,\;P_X(1)=0.60$; $\;P_Y(1)=0.30,\;P_Y(2)=0.70$.
+\item $P(Y=y\mid X=1)=\dfrac{p(1,y)}{0.60}$: $\;P(Y=1)=0.30,\;P(Y=2)=0.70$.
+\item $0.40\times0.30=0.12$, $\;0.40\times0.70=0.28$, $\;0.60\times0.30=0.18$, $\;0.60\times0.70=0.42$; all equal $p(x,y)$. Hence independent.
+\item $F(0,2)=p(0,1)+p(0,2)=0.12+0.28=0.40$.
+\item $XY=1$: $(1,1)$. $P=0.18$.
+\item $XY^2=4$: $(1,2)$. $P=0.42$.
+\item $2XY=4\iff XY=2$: $(1,2)$. $P=0.42$.
+\item $X+2Y\ge4$: $(0,2),(1,2)$. $P=0.28+0.42=0.70$.
+\item $X^2+Y\le2$: $(0,1),(1,1),(0,2)$. $P=0.12+0.18+0.28=0.58$.
+\end{enumerate}
+\viva{With independence, a missing cell is found by $p(x,y)=P_X(x)P_Y(y)$ or by subtracting from the marginal total.}
+
+\section*{Q.13}
+$X=|d_1-d_2|$, $Y=\max(d_1,d_2)$. For $Y=m$: $X=0$ occurs once, and each $X=d$ with $1\le d\le m-1$ occurs twice.
+
+\begin{enumerate}
+\item Table of $36\,p(x,y)$ (divide every entry by $36$):
+\[
+\begin{array}{c|cccccc|c}
+X\backslash Y & 1&2&3&4&5&6 & 36P_X\\ \hline
+0 & 1&1&1&1&1&1 & 6\\
+1 & 0&2&2&2&2&2 & 10\\
+2 & 0&0&2&2&2&2 & 8\\
+3 & 0&0&0&2&2&2 & 6\\
+4 & 0&0&0&0&2&2 & 4\\
+5 & 0&0&0&0&0&2 & 2\\ \hline
+36P_Y & 1&3&5&7&9&11 & 36
+\end{array}
+\]
+\item $P_X(x)=\dfrac{6}{36},\dfrac{10}{36},\dfrac{8}{36},\dfrac{6}{36},\dfrac{4}{36},\dfrac{2}{36}$ for $x=0,\dots,5$, and $P_Y(y)=\dfrac{2y-1}{36}$ for $y=1,\dots,6$.
+\item $P(Y=4)=\tfrac7{36}$, so $P(X=x\mid Y=4)=\dfrac{p(x,4)}{7/36}$:
+\[
+P(X=0\mid Y=4)=\tfrac17,\quad P(X=1\mid Y=4)=\tfrac27,\quad P(X=2\mid Y=4)=\tfrac27,\quad P(X=3\mid Y=4)=\tfrac27 .
+\]
+\item $p(1,1)=0$ but $P_X(1)P_Y(1)=\tfrac{10}{36}\cdot\tfrac1{36}\neq0$. \textbf{Not independent.}
+\item $F(2,4)=P(X\le2,Y\le4)$: column sums for $y=1,2,3,4$ restricted to $x\le2$ are $1,3,5,5$. $F=\tfrac{14}{36}=\tfrac7{18}$.
+\item $XY=6$: $(1,6)$ and $(2,3)$ ($(3,2)$ has $p=0$). $P=\tfrac2{36}+\tfrac2{36}=\tfrac19$.
+\item $XY^2=12$: the only integer solution is $y=2,\,x=3$, i.e.\ $(3,2)$, but $p(3,2)=0$ because $x\le y-1$. $P=0$.
+\item $2XY=12\iff XY=6$, same as (vi): $P=\tfrac19$.
+\item $X^2+Y\le7$: $y=1$: $1$; $y=2$: $x=0,1\Rightarrow3$; $y=3$: $x=0,1,2\Rightarrow5$; $y=4$: $x=0,1\Rightarrow3$; $y=5$: $x=0,1\Rightarrow3$; $y=6$: $x=0,1\Rightarrow3$. Total $18$, $P=\tfrac{18}{36}=\tfrac12$.
+\item $X+2Y\ge10$: $y=4$: $x\ge2\Rightarrow4$; $y=5$: all $\Rightarrow9$; $y=6$: all $\Rightarrow11$. Total $24$, $P=\tfrac{24}{36}=\tfrac23$.
+\end{enumerate}
+\viva{Always remember the structural constraint $X\le Y-1$ (for $X\ge1$); it is the source of all the zero cells.}
+
+\section*{Q.14}
+\begin{enumerate}
+\item
+\[
+\begin{array}{c|ccc|c}
+Y\backslash X & 0 & 1 & 2 & P_Y(y)\\ \hline
+0 & 0.10 & 0.20 & 0.10 & 0.40\\
+1 & 0.15 & 0.25 & 0.20 & 0.60\\ \hline
+P_X(x) & 0.25 & 0.45 & 0.30 & 1
+\end{array}
+\]
+\item $P_X(x)=0.25,\,0.45,\,0.30$ for $x=0,1,2$; $\;P_Y(0)=0.40,\;P_Y(1)=0.60$.
+\item $P(X=x\mid Y=1)=\dfrac{p(x,1)}{0.60}$: $\;0.25,\;\tfrac5{12},\;\tfrac13$ for $x=0,1,2$.
+\item $p(1,0)=0.20$ but $P_X(1)P_Y(0)=0.45\times0.40=0.18$. \textbf{Not independent.}
+\item $F(1,1)=0.10+0.20+0.15+0.25=0.70$.
+\item $X^2+Y^2=1$: $(1,0),(0,1)$. $P=0.20+0.15=0.35$.
+\item $XY^2=2$: $(2,1)$. $P=0.20$.
+\item $XY=2$: $(2,1)$. $P=0.20$.
+\item $X+2Y\ge2$: all except $(0,0)$ and $(1,0)$. $P=1-0.10-0.20=0.70$.
+\item $X^2+Y\le2$: $(0,0),(1,0),(0,1),(1,1)$. $P=0.10+0.20+0.15+0.25=0.70$.
+\end{enumerate}
+\viva{Use the complement rule $P(A)=1-P(A^c)$ whenever fewer cells fail the condition than satisfy it.}
+
+\end{document}

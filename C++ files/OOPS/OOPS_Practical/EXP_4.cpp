@@ -1,50 +1,69 @@
-#include <iostream>
-using namespace std;
-
-class Student
-{
-    int rollNo;
-
-public:
-    Student()
-    {
-        rollNo = 0;
-        cout << "Default constructor called" << endl;
-    }
-
-    Student(int r)
-    {
-        rollNo = r;
-        cout << "Parameterized constructor called" << endl;
-    }
-
-    Student(Student &s)
-    {
-        rollNo = s.rollNo;
-        cout << "Copy constructor called" << endl;
-    }
-
-    void display()
-    {
-        cout << "Roll Number = " << rollNo << endl;
-    }
-
-    ~Student()
-    {
-        cout << "Destructor called" << endl;
-    }
-};
-
-int main()
-{
-    Student s1;
-    s1.display();
-
-    Student s2(101);
-    s2.display();
-
-    Student s3(s2);
-    s3.display();
-
-    return 0;
-}
+#include <iostream> 
+#include <string> 
+using namespace std; 
+ 
+class Student 
+{ 
+private: 
+    string name; 
+    int rollNumber; 
+    float marks; 
+ 
+public: 
+    Student() 
+    { 
+        name = "Unknown"; 
+        rollNumber = 0; 
+        marks = 0.0; 
+        cout << "Default Constructor Called" << endl; 
+    } 
+ 
+    Student(string n, int r, float m) 
+    { 
+        name = n; 
+        rollNumber = r; 
+        marks = m; 
+        cout << "Parameterized Constructor Called" << endl; 
+    } 
+ 
+    Student(const Student &s) 
+    { 
+        name = s.name; 
+        rollNumber = s.rollNumber; 
+        marks = s.marks; 
+        cout << "Copy Constructor Called" << endl; 
+ 
+    } 
+ 
+    void display() 
+    { 
+        cout << "\nName        : " << name << endl; 
+        cout << "Roll Number : " << rollNumber << endl; 
+        cout << "Marks       : " << marks << endl; 
+    } 
+ 
+    ~Student() 
+    { 
+        cout << "Destructor Called for " << name << endl; 
+    } 
+}; 
+ 
+int main() 
+{ 
+    Student student1; 
+ 
+    Student student2("Abhishek", 101, 101.99); 
+ 
+    Student student3 = student2; 
+ 
+    cout << "\nStudent 1 Details:"; 
+    student1.display(); 
+ 
+    cout << "\nStudent 2 Details:"; 
+    student2.display(); 
+ 
+    cout << "\nStudent 3 Details:"; 
+    student3.display(); 
+ 
+    return 0; 
+} 
