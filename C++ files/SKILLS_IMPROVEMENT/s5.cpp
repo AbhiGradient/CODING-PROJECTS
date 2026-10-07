@@ -24,6 +24,18 @@ public:
         gpa = g;  // the constructors will get chaged and used as per the inputs
     }
 
+    Student (int r){  //multiple constructors are possible
+       
+        roll = r;
+         // the constructors will get chaged and used as per the inputs
+    }
+
+    Student(int r, float g, string n){
+        gpa = g;
+        roll = r;
+        name = n;
+    }
+
     // Display function
     void display() {
         cout << "------------------------------------------------------\n";
@@ -51,6 +63,20 @@ s1.gpa = 10;  // cgpa is assiigned seperately using = operator
     Student s3("soham", 9, 8.9599);  // parameterized constructor 
 //all 3 values are passed and the 2nd constructor is  used now
     s3.display();
+
+    Student s4(45);
+    s4.display();
+
+    Student s5(69, 8.99, "sam");
+    s5.display();
+
+    Student s6 = s1;
+    s6.name = "hitler";  //deep copy not shallow copy 
+    s6.display();
+
+    Student s7(s1);    //copy constructor  // deep copy as well
+    s7.display();
+
 
     return 0;
 }
